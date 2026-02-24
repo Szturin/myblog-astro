@@ -2,8 +2,6 @@
 title: "【Opencv】[1]图像处理基本概念"
 published: 2024-07-07
 updated: 2024-10-03
-tags:
-  - "学习笔记,计算机视觉"
 description: ""
 ---
 
@@ -47,7 +45,7 @@ description: ""
 > 
 > ​ 用下面这个圆柱体来表示 HSV 颜色空间，圆柱体的横截面可以看做是一个极坐标系 ，H 用极坐标的极角表示，S 用极坐标的极轴长度表示，V 用圆柱中轴的高度表示。
 > 
-> ![](/img/loading.gif)
+> ![](/posts/51713/a8d376f7eceb5a45001650bde730f019.png)
 
 ## [](#3-分辨率和像素)3\. 分辨率和像素
 
@@ -73,7 +71,7 @@ description: ""
 > 
 > 以下是一个使用 OpenCV 提取 ROI 的简单示例：
 > 
-> ```plaintext
+> ```
 > import cv2# 读取图像image = cv2.imread('image.jpg')# 定义ROI的坐标（左上角和右下角）x1, y1 = 100, 100  # 左上角坐标x2, y2 = 300, 300  # 右下角坐标# 提取ROI区域roi = image[y1:y2, x1:x2]# 显示原图和ROI区域cv2.imshow('Original Image', image)cv2.imshow('ROI', roi)# 等待按键cv2.waitKey(0)cv2.destroyAllWindows()
 > ```
 > 
@@ -122,9 +120,9 @@ Opencv常见相关功能库：
 
 `cv2.imread()`
 
--   cv.IMREAD_COLOR： 加载彩色图像。任何图像的透明度都会被忽视。它是默认标志。
--   cv.IMREAD_GRAYSCALE：以灰度模式加载图像
--   cv.IMREAD_UNCHANGED：加载图像，包括alpha通道
+-   cv.IMREAD\_COLOR： 加载彩色图像。任何图像的透明度都会被忽视。它是默认标志。
+-   cv.IMREAD\_GRAYSCALE：以灰度模式加载图像
+-   cv.IMREAD\_UNCHANGED：加载图像，包括alpha通道
 
 **注意**： 除了这三个标志，你可以分别简单地传递整数1、0或-1。
 
@@ -376,7 +374,7 @@ e1 = cv.getTickCount()# 你的执行代码e2 = cv.getTickCount()time = (e2 - e1)
 > -   **描述**：使用性能分析工具（如`cProfile`和`line_profiler`）找出性能瓶颈，针对性优化。
 > -   来源：
 >     -   [cProfile Documentation](https://docs.python.org/3/library/profile.html)
->     -   [line_profiler](https://github.com/pyutils/line_profiler)
+>     -   [line\_profiler](https://github.com/pyutils/line_profiler)
 > 
 > ### [](#8-利用科学计算库)8\. **利用科学计算库**
 > 

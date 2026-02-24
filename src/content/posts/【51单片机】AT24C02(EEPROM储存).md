@@ -3,8 +3,6 @@ title: "【51单片机】AT24C02(EEPROM储存)"
 published: 2024-03-05
 updated: 2024-09-04
 category: 学习笔记
-tags:
-  - 单片机
 description: ""
 ---
 
@@ -28,7 +26,7 @@ description: ""
 
 **MCU中常见的通信协议：**
 
-![](/img/loading.gif)
+![](/posts/4799/5490adeb2e9d43dcae940a3b83a35b73.png)
 
 ### [](#二-推挽输出和开漏输出)二、推挽输出和开漏输出
 
@@ -68,7 +66,7 @@ description: ""
 
 * * *
 
-![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/4799/1baf27e6e69a429394f21dd1a30900f1.png) ![](/posts/4799/115006bca35b4b2a8193651f437b65fc.png) ![](/posts/4799/a1ec063743594e96bb853e3fe69a3800.png) ![](/posts/4799/image-20240302223549490.png) ![](/posts/4799/72b48d4af46f41ec9fe40720751e4a39.png) ![](/posts/4799/image-20240302225440107.png)
 
 * * *
 
@@ -108,7 +106,7 @@ description: ""
 
 * * *
 
-![](/img/loading.gif)
+![](/posts/4799/image-20240302224153992.png)
 
 > 单片机烧录的由来：早期通过编程储存数据，实际上是将特殊的二极管击穿，相当于“烧毁”（PROM）
 
@@ -116,7 +114,7 @@ description: ""
 
 ### [](#二-at24c02)二、AT24C02
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/4799/image-20240302224329935.png) ![](/posts/4799/7b07f23e9e7640f1b8db85bc873a9e36.png)
 
 # [](#代码部分)代码部分
 
@@ -148,19 +146,19 @@ AT24C02_WriteByte(0,Num%256);//低八位Delay(5);AT24C02_WriteByte(1,Num/256);//
 > 
 > **实验结果：如果直接让Nixie在判断键码后显示Keynum值，只能显示一瞬间，数码管的显示方式不同于LCD1602，所以需要一个缓存量Temp**
 
-```plaintext
+```
 /*错误写法*/Temp=Key();if(KeyNum)//显示结果只在一瞬间显示{	Nixie(1,KeyNum);}/*正确写法*/if(Temp){	KeyNum=Temp;}Nixie(1,KeyNum);
 ```
 
 > **实验：定时器按键扫描实列2**
 
-```plaintext
+```
 #include <REGX52.H>#include "Key.h"#include "AT24C02.h"#include "Timer0.h"#include "Nixie.h"#include "Delay.h"unsigned char KeyNum;void main(){	Timer0_Init();	while(1)	{		KeyNum=Key();		if(KeyNum)		{			Nixie_SetBuf(1,KeyNum);			Nixie_SetBuf(2,KeyNum);			Nixie_SetBuf(3,KeyNum);			Delay(1000);		}	}}void Timer0_Routine() interrupt 1 //中断子程序{		static unsigned int T0Count1,T0Count2;//静态局部变量，保证退出函数之后不销毁		TL0 = 0x66;				//设置定时初始值		TH0 = 0xFC;				//设置定时初始值			T0Count1++;//每次进入中断子程序，秒控制器自加一		if(T0Count1>=20)//每隔20ms，按键函数会被调用一次		{			T0Count1=0;			Key_Loop(); 		}		T0Count2++;		if(T0Count2>=2)		{			 T0Count2=0;			 Nixie_Loop();		}}
 ```
 
 > **实验结果：**
 > 
-> ![](/img/loading.gif) ![](/img/loading.gif)
+> ![](/posts/4799/cd3ca4af62f4478d9e79c4a31087a160.jpeg) ![](/posts/4799/858d834686d84ec7b7dab21610cca5db.jpeg)
 > 
 > **这时，按下按键，数码管显示会延时一秒改变，可见，使用定时器扫描按键，不会被延时函数影响，相较于延时函数使单片机的工作更具有可靠性**
 

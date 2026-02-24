@@ -2,8 +2,6 @@
 title: "【pid算法】[入门篇] 1-深入浅出pid控制算法原理"
 published: 2024-05-12
 updated: 2024-11-18
-tags:
-  - "学习笔记,PID算法"
 description: ""
 ---
 
@@ -13,18 +11,18 @@ description: ""
 
 [Webpack App (rossning92.github.io)](https://rossning92.github.io/pid-simulation/)
 
-![](/img/loading.gif)
+![](/posts/34110/image-20240512152800666.png)
 
 ## [](#多环平衡小车)多环(平衡小车)
 
-![](/img/loading.gif)
+![](/posts/34110/image-20240512154358581.png)
 ```c
 int Kp,Ki,Kd;int Error;int Error_old;int Error_difference;long int Error_sum;void I_amplitude_limiting(int number){	if(Error_sum>number)	{		Error_sum=number;	}}//PID控制系统:P、I、D共同作用//measure,calcu:系统的输入int PID_control(float measure,float calcu){	Error = measure - calcu;//误差值	Error_sum += Error;//误差累加	I_amplitude_limiting(2000);//限幅函数	Error_difference = Error- Error_old;//误差变化率(近似于对时间的微分)	Error_old = Error;	return(Kp*Error+Kd*Error_difference+Ki*Error_sum);//PID控制器响应结果}
 ```
 
 # [](#二-pid的基本原理)二、PID的基本原理
 
-![](/img/loading.gif)
+![](/posts/34110/image-20240922163140757.png)
 
 ## [](#1-pid类型)1\. PID类型
 
@@ -88,11 +86,11 @@ int Kp,Ki,Kd;int Error;int Error_old;int Error_difference;long int Error_sum;voi
 
 [智能车电机系统辨识和PID仿真自动调参 - ittuann](https://ittuann.github.io/2021/08/29/CarSimulate.html#pid-tuner-%E8%87%AA%E5%8A%A8%E8%B0%83%E5%8F%82)
 
-[Enterprise_E/CODE/pid.c at main · ittuann/Enterprise_E (github.com)](https://github.com/ittuann/Enterprise_E/blob/main/CODE/pid.c)
+[Enterprise\_E/CODE/pid.c at main · ittuann/Enterprise\_E (github.com)](https://github.com/ittuann/Enterprise_E/blob/main/CODE/pid.c)
 
 ## [](#1-matlab快速参数整定的方法)1\. Matlab快速参数整定的方法
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/34110/image-20241101124639534.png) ![](/posts/34110/image-20241101124707602.png)
 
 **导入数据设置**
 
@@ -100,8 +98,8 @@ int Kp,Ki,Kd;int Error;int Error_old;int Error_difference;long int Error_sum;voi
 -   设置起始时间为0
 -   Sample time：采样时间，本图为10ms
 
-![](/img/loading.gif)
+![](/posts/34110/image-20241101124743531.png)
 
 # [](#pid和信号与系统dsp)PID和信号与系统（DSP）
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/34110/image-20241119014554822.png) ![](/posts/34110/image-20241119014611197.png)

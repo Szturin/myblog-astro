@@ -3,8 +3,6 @@ title: "【单片机】IIC通信协议"
 published: 2024-03-08
 updated: 2024-05-02
 category: 学习笔记
-tags:
-  - 单片机
 description: ""
 ---
 
@@ -18,7 +16,7 @@ description: ""
 
 **MCU中常见的通信协议：**
 
-![](/img/loading.gif)
+![](/posts/19787/5490adeb2e9d43dcae940a3b83a35b73.png)
 
 ### [](#二-推挽输出和开漏输出)二、推挽输出和开漏输出
 
@@ -26,7 +24,7 @@ description: ""
 
 > 推挽输出结构是由两个MOS或者[三极管](https://so.csdn.net/so/search?q=%E4%B8%89%E6%9E%81%E7%AE%A1&spm=1001.2101.3001.7020)收到互补控制的信号控制，两个管子时钟一个在导通，一个在截止，如图1所示：
 
-![](/img/loading.gif)
+![](/posts/19787/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2xpdHRsZV9veA==,size_16,color_FFFFFF,t_70.png)
 
 特点:
 
@@ -38,7 +36,7 @@ description: ""
 
 > 常说的与推挽输出相对的就是开漏输出，抽象地说就是COMS反相器去掉了NMOS部分，PMOS管漏极输出，即开漏输出。PMOS管由高电平导通输出低电平，高电平没有驱动能力，需要借助“上拉电阻” (一般上拉电阻值较大，即弱上拉模式)[什么是弱上拉?](https://blog.csdn.net/monkey_d_xue/article/details/129802153)
 
-![](/img/loading.gif)
+![](/posts/19787/20201208174916607.png)
 
 ##### [](#开漏输出的另一个优点在于可以实现线与功能所谓的线与指的是多个信号线直接连接在一起只有当所有信号全部为高电平时合在一起的总线为高电平只要有任意一个或者多个信号为低电平则总线为低电平这就是为什么后面用到iic通信当一个信号线为低电平要释放总线)**开漏输出的另一个优点在于可以实现"线与"功能，所谓的"线与"指的是多个信号线直接连接在一起，只有当所有信号全部为高电平时，合在一起的总线为高电平；只要有任意一个或者多个信号为低电平，则总线为低电平(这就是为什么后面用到IIC通信,当一个信号线为低电平,要"释放总线")。**
 
@@ -70,7 +68,7 @@ description: ""
 
 * * *
 
-![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/19787/1baf27e6e69a429394f21dd1a30900f1.png) ![](/posts/19787/115006bca35b4b2a8193651f437b65fc.png) ![](/posts/19787/a1ec063743594e96bb853e3fe69a3800.png) ![](/posts/19787/image-20240302223549490.png) ![](/posts/19787/72b48d4af46f41ec9fe40720751e4a39.png) ![](/posts/19787/image-20240302225440107.png)
 
 * * *
 

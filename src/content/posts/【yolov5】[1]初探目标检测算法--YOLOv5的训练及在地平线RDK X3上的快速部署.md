@@ -3,17 +3,10 @@ title: "【yolov5】[1]初探目标检测算法--YOLOv5的训练及在地平线R
 published: 2024-07-11
 updated: 2024-12-10
 category: 学习笔记
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
-# [](#一-windows环境下的模型训练-swig16-)一、Windows环境下的模型训练![](/img/loading.gif)
+# [](#一-windows环境下的模型训练-swig16-)一、Windows环境下的模型训练![](/posts/31493/image-20241207190642352.png)
 
 针对YOLO的模型训练环境配置，Windows端兼容性差于Ubuntu，如果电脑上有Ubuntu系统，建议用Ubuntu系统进行训练（但注意，虚拟机安装的Ubuntu系统无法使用物理GPU进行训练）。
 
@@ -51,15 +44,15 @@ description: ""
 > conda activate <env_name>
 > ```
 
-> 如配置好yolo的环境，安装好pytorch，cuda，yolo相关依赖，就需要使用conda activate yolov5_7.0激活
+> 如配置好yolo的环境，安装好pytorch，cuda，yolo相关依赖，就需要使用conda activate yolov5\_7.0激活
 
 #### [](#211-常见问题)2.1.1 常见问题：
 
 Anoconda环境下无法识别到CUDA
 
-**参考文章**：[print(torch.cuda.is_available())是false_pip install torch==2.0.1+cu117-CSDN博客](https://blog.csdn.net/qq_71547093/article/details/133581922)
+**参考文章**：[print(torch.cuda.is\_available())是false\_pip install torch==2.0.1+cu117-CSDN博客](https://blog.csdn.net/qq_71547093/article/details/133581922)
 
-![](/img/loading.gif)
+![](/posts/31493/0248d8bfdc09cf576bce9846dbea681e.png)
 
 **问题原因**：
 
@@ -126,8 +119,8 @@ def forward(self, x):    """Processes input through YOLOv5 layers, altering shap
 python train.py --data face_data.yaml --cfg face_yolo5s.yaml --weights pretrained/yolov5s.pt --batch-size 16 --epochs 300  --imgsz 672 --device 0
 ```
 
--   face_data.yaml：指定数据集的配置文件为 `face_data.yaml`，这个文件包含了训练和验证数据集的路径、类别数以及类别名称等信息
--   face_yolo5s.yaml：指定 YOLOv5 模型的配置文件为 `face_yolo5s.yaml`，这个文件定义了模型的结构和各项超参数
+-   face\_data.yaml：指定数据集的配置文件为 `face_data.yaml`，这个文件包含了训练和验证数据集的路径、类别数以及类别名称等信息
+-   face\_yolo5s.yaml：指定 YOLOv5 模型的配置文件为 `face_yolo5s.yaml`，这个文件定义了模型的结构和各项超参数
 -   weights：指定预训练权重文件的路径为 `pretrained/yolov5s.pt`，这些权重将用于初始化模型的参数，以加速训练收敛
 -   batch-size：设置训练时的批量大小为 4，这表示每次迭代中使用的样本数为 4，影响训练速度和模型训练过程
 -   device：指定训练时使用的设备，这里的 `0` 表示使用 GPU 0。如果你有多个 GPU，可以根据需要更改这个数字；如果你想使用 CPU，可以将其设置为 `cpu`
@@ -188,7 +181,7 @@ hb_mapper checker --model-type onnx --march bernoulli2 --model models_onnx/my_fa
 hb_mapper makertbin --config yaml文件的位置 --model-type onnx
 ```
 
-执行命令之后，可以在model_output文件夹中找到对应的bin文件
+执行命令之后，可以在model\_output文件夹中找到对应的bin文件
 
 **模型性能分析(开发机评测性能)**
 
@@ -224,7 +217,7 @@ hb_perf  ***.bin
 
 [YOLOV5 在地平线RDK X3的高效部署 (horizon.cc)](https://developer.horizon.cc/forumDetail/198686198578007656)
 
-![](/img/loading.gif)
+![](/posts/31493/605ba25c7844d1c31120f0361c46893.png)
 
 #### [](#212-c版本)2.1.2 C++版本
 
@@ -232,17 +225,17 @@ hb_perf  ***.bin
 
 一种解决方案是，使用Cython加速后处理部分，用Cython的方法封装C++为Python的接口。能够极大提升模型性能。
 
-**参考文章：**[[BPU部署教程] 教你搞定YOLOV5部署 (版本_ 6.2) (d-robotics.cc)](https://developer.d-robotics.cc/forumDetail/112555549341653639)
+**参考文章：**[[BPU部署教程] 教你搞定YOLOV5部署 (版本\_ 6.2) (d-robotics.cc)](https://developer.d-robotics.cc/forumDetail/112555549341653639)
 
 # [](#总结)总结
 
 参考文章汇总：
 
--   [print(torch.cuda.is_available())是false_pip install torch==2.0.1+cu117-CSDN博客](https://blog.csdn.net/qq_71547093/article/details/133581922)
+-   [print(torch.cuda.is\_available())是false\_pip install torch==2.0.1+cu117-CSDN博客](https://blog.csdn.net/qq_71547093/article/details/133581922)
 -   [YOLOv5较新版本的部署方法 (horizon.cc)](https://developer.horizon.cc/forumDetail/177840589839214598)
 -   [【模型提速】如何在X3pi使用yolov5模型50ms推理 (horizon.cc)](https://developer.horizon.cc/forumDetail/163807123501918330)
 -   [YOLOV5 在地平线RDK X3的高效部署 (horizon.cc)](https://developer.horizon.cc/forumDetail/198686198578007656)
--   [[BPU部署教程] 教你搞定YOLOV5部署 (版本_ 6.2) (d-robotics.cc)](https://developer.d-robotics.cc/forumDetail/112555549341653639)
+-   [[BPU部署教程] 教你搞定YOLOV5部署 (版本\_ 6.2) (d-robotics.cc)](https://developer.d-robotics.cc/forumDetail/112555549341653639)
 
 本文使用环境：Windows(训练) -> 虚拟机Ubuntu(转换，校验) -> 板端RDK X3(最终部署)
 

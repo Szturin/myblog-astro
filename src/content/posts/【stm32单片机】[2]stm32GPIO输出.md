@@ -3,8 +3,6 @@ title: "【stm32单片机】[2]stm32GPIO输出"
 published: 2024-02-27
 updated: 2024-09-03
 category: 学习笔记
-tags:
-  - 单片机
 description: ""
 ---
 
@@ -30,13 +28,13 @@ description: ""
 
 # [](#gpio常用函数)GPIO常用函数
 
--   xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO_InitTypeDef的名字{}GPIO_InitTypeDef;c
--   GPIO_ResetBits(GPIOA,GPIO_Pin_0);**将GPIOA_0设置为低电平**
--   GPIO_WriteBit(GPIOA,GPIO_Pin_0,Bit_RESET);**将GPIOA_0选择为高电平**
+-   xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO\_InitTypeDef的名字{}GPIO\_InitTypeDef;c
+-   GPIO\_ResetBits(GPIOA,GPIO\_Pin\_0);**将GPIOA\_0设置为低电平**
+-   GPIO\_WriteBit(GPIOA,GPIO\_Pin\_0,Bit\_RESET);**将GPIOA\_0选择为高电平**
 
-![](/img/loading.gif)
+![](/posts/56552/image-20240228000033935.png)
 
--   GPIO_DeInit(\*GPIO_InitTypeDef,GPIOX) **初始化指定的GPIO的时钟**
+-   GPIO\_DeInit(\*GPIO\_InitTypeDef,GPIOX) **初始化指定的GPIO的时钟**
 
 # [](#gpio输出)GPIO输出
 

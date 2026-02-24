@@ -3,8 +3,6 @@ title: "【单片机】OneWire通信协议"
 published: 2024-03-08
 updated: 2024-09-03
 category: 学习笔记
-tags:
-  - 单片机
 description: ""
 ---
 
@@ -26,11 +24,11 @@ description: ""
 
 •若此总线的从机采取寄生供电，则主机还应配一个强上拉输出电路
 
-![](/img/loading.gif)
+![](/posts/46163/image-20240302232447437.png)
 
 ### [](#三-单总线的时序结构)三、单总线的时序结构
 
-![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/46163/image-20240302232633388.png) ![](/posts/46163/image-20240302232648244.png) ![](/posts/46163/image-20240302232700200.png) ![](/posts/46163/image-20240302232708528.png)
 
 * * *
 

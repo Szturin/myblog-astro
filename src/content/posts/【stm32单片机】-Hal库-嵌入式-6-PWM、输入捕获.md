@@ -2,13 +2,6 @@
 title: "【stm32单片机】-Hal库-嵌入式-6-PWM、输入捕获"
 published: 2024-10-15
 updated: 2024-10-29
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
@@ -22,23 +15,23 @@ description: ""
 
 -   选择Internal(内部时钟)
 
-![](/img/loading.gif)
+![](/posts/12030/image-20241015222342274.png)
 
 根据CubeMX的芯片引脚图，选中引脚后的相关外设提示，可以便捷的配置定时器的作用通道
 
-![](/img/loading.gif)
+![](/posts/12030/image-20241015222740979.png)
 
 定时器PWM相关配置项
 
 这里50有误，应该改为500——>对应50%的占空比
 
-![](/img/loading.gif)
+![](/posts/12030/image-20241015223259551.png)
 
 # [](#二-输入捕获)二、输入捕获
 
 ## [](#1-cubemx配置-2)1\. CubeMX配置
 
-![](/img/loading.gif)
+![](/posts/12030/image-20241015230019438.png)
 
 **Slave Mode**: Reset Mode
 
@@ -68,15 +61,15 @@ description: ""
 
 > 思考：为什么输入捕获要设置为从模式？
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/12030/image-20241015230241742.png) ![](/posts/12030/image-20241016190503917.png)
 
 DMA转运TIM通道1数据
 
-![](/img/loading.gif)
+![](/posts/12030/image-20241015230459480.png)
 
 继续配置PA15
 
-![](/img/loading.gif)
+![](/posts/12030/image-20241015230709867.png)
 
 > 问题：通过输入捕获测出来频率可能为4000
 > 

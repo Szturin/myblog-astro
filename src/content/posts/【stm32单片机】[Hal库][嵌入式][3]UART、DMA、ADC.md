@@ -2,13 +2,6 @@
 title: "【stm32单片机】[Hal库][嵌入式][3]UART、DMA、ADC"
 published: 2024-09-15
 updated: 2024-12-15
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
@@ -20,7 +13,7 @@ description: ""
 
 主要配置波特率，其余默认
 
-.vpyvllnqfgtk{}![image-20240919224239733](/img/loading.gif)
+.vpyvllnqfgtk{}![image-20240919224239733](/posts/24028/image-20240919224239733.png)
 
 **中断配置**
 
@@ -28,7 +21,7 @@ Preemption Priority：抢占优先级
 
 Sub Priority: 子优先级
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240919224306805.png)
 
 **串口的DMA设置**
 
@@ -39,7 +32,7 @@ DMA的模式：
 -   Normol
 -   Circual
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/24028/image-20240919224441445.png) ![](/posts/24028/image-20240919224501610.png)
 
 ## [](#2-驱动程序编写)2\. 驱动程序编写
 
@@ -47,12 +40,12 @@ DMA的模式：
 
 **在uasrt.c中进行修改**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240919225413251.png)
 ```c
 int fputc(int ch, FILE * str){	HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,10);    return ch;}
 ```
 
-### [](#22-app_uartc-变量定义)2.2 **app_uart.c 变量定义**
+### [](#22-app_uartc-变量定义)2.2 **app\_uart.c 变量定义**
 
 ```c
 uint16_t uart_rx_index = 0;uint16_t uart_tx_ticks = 0;uint8_t uart_rx_buffer[128]={0};
@@ -67,7 +60,7 @@ uint16_t uart_rx_index = 0;uint16_t uart_tx_ticks = 0;uint8_t uart_rx_buffer[128
 ```c
 HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
 ```
-![](/img/loading.gif)
+![](/posts/24028/image-20240920223856904.png)
 
 > Hal库——中断回调函数
 > 
@@ -109,19 +102,19 @@ HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
 
 **弱定义**
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/24028/image-20240915220013260.png) ![](/posts/24028/image-20240920223951975.png)
 
 **自定义回调函数**
 
 可以自行声明与弱定义回调函数同名的函数(重写)，会优先执行自定义的函数
 
-Hal库中各种弱定义都是用__weak修饰的
+Hal库中各种弱定义都是用\_\_weak修饰的
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240915220050996.png)
 
 过程：串口接收->触发回调->进入回调函数
 
-PS: void HAL_UART_RxCpliCallback(UART_HandleTypeDef \*huart) 不要用成 void HAL_UART_TxCpliCallback(UART_HandleTypeDef \*huart)
+PS: void HAL\_UART\_RxCpliCallback(UART\_HandleTypeDef \*huart) 不要用成 void HAL\_UART\_TxCpliCallback(UART\_HandleTypeDef \*huart)
 
 ```c
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){    if(huart->Instance == USART1)    {        uart_rx_ticks = uwTick;        uart_rx_index++;//索引自增        //每次触发回调，都要重新初始化接收中断，定义接收的位置        HAL_UART_Receive_IT(&huart1,&uart_r_buffer[uart_rx_index],1);    }}
@@ -141,7 +134,7 @@ void uart_proc(void){    if(uart_rx_index == 0) return;        if(uwTick - uart_
 > 
 > **1\. 串口阻塞的解决方案**
 > 
-> ![](/img/loading.gif)
+> ![](/posts/24028/image-20240919233036903.png)
 > 
 > DMA:数据转运
 > 
@@ -158,11 +151,11 @@ void uart_proc(void){    if(uart_rx_index == 0) return;        if(uwTick - uart_
 
 CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920234311280.png)
 
 ### [](#2-回调函数名称错误)2\. 回调函数名称错误
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920231957317.png)
 
 # [](#二-dma空闲中断)二、DMA+空闲中断
 
@@ -214,15 +207,15 @@ CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 > **典型场景：**  
 > 假设通过 UART 接收的数据包长度不定，当接收到一个完整的数据帧时，串口线路会进入空闲状态，此时触发空闲中断，可以认为本次数据接收结束。
 > 
-> ```plaintext
+> ```
 > c复制代码// 空闲中断回调函数示例void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_
 > ```
 
 ## [](#1-变量声明)1\. 变量声明
 
-**声明 uart_rx_dma_buffer变量，用于数据转运**
+**声明 uart\_rx\_dma\_buffer变量，用于数据转运**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240919233721950.png)
 
 ## [](#2-中断初始化)2\. **中断初始化**
 
@@ -230,31 +223,31 @@ CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 
 关闭DMA半中断
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240919233901381.png)
 
 **PS: 不再适用串口回调，改用DMA的方法**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240919234047785.png)
 
 ## [](#3-串口中断函数)3\. **串口中断函数**
 
 每次触发串口中断，触发DMA中断
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920200100912.png)
 
 **取消使用串口中断回调函数**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920200332492.png)
 
 **改用空闲中断回调函数**
 
 PS: 不再需要串口超时解析
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/24028/image-20240920200417955.png) ![](/posts/24028/image-20240920200913934.png)
 
 ## [](#现象-2)\# 现象：
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240921001109060.png)
 
 ## [](#补充中断函数与回调函数的区别)\# 补充——中断函数与回调函数的区别
 
@@ -317,7 +310,7 @@ PS: 不再需要串口超时解析
 > 
 > [环形缓冲区(ring buffer)原理与实现详解-CSDN博客](https://blog.csdn.net/2401_86353562/article/details/141830232)
 > 
-> ![](/img/loading.gif)
+> ![](/posts/24028/9af5be294e82d063ae8d1eb1d642ed7a.png)
 > 
 > **简单代码实现：**
 > 
@@ -337,7 +330,7 @@ PS: 不再需要串口超时解析
 > -   作用：是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法
 > -   头文件：C中`#include<string.h>`，C++中`#include<cstring>`
 > 
-> 这里指向的是环形缓冲区内容buffer，为uint8_t类型的数组变量，数组大小为`RINGBUFFER_SIZE`，使用这段语句将buffer中的内存块内容置零。
+> 这里指向的是环形缓冲区内容buffer，为uint8\_t类型的数组变量，数组大小为`RINGBUFFER_SIZE`，使用这段语句将buffer中的内存块内容置零。
 > 
 > ```c
 > // 初始化环形缓冲区void ringbuffer_init(ringbuffer_t *rb){    // 设置读指针和写指针初始值为0    rb->r = 0;    rb->w = 0;    // 将缓冲区内存清零    memset(rb->buffer, 0, sizeof(uint8_t) * RINGBUFFER_SIZE);    // 初始化项目计数为0    rb->itemCount = 0;}
@@ -416,7 +409,7 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 > 
 > CT117E原理图：
 > 
-> ![](/img/loading.gif)
+> ![](/posts/24028/image-20240921165117470.png)
 
 ## [](#1-cubemx配置-2)1\. CubeMX配置
 
@@ -425,23 +418,23 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 -   ADC1: IN11
 -   ADC2: IN15
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920205816075.png)
 
 ### [](#12-配置dma)1.2 配置DMA
 
 #### [](#121-配置dma通道)1.2.1 配置DMA通道
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920205900067.png)
 
 #### [](#122-配置为循环模式)1.2.2 配置为循环模式
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240921004004318.png)
 
 #### [](#123-配置dma速度)1.2.3 配置DMA速度
 
 设置为中、高均可
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920210046359.png)
 
 ### [](#13-配置adc属性)1.3 **配置ADC属性**
 
@@ -449,32 +442,32 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 -   DMA使能
 -   循环使能
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920210259713.png)
 
 ### [](#14-配置adc中断)1.4 **配置ADC中断**
 
 优先级为2即可
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920210416469.png)
 
 ## [](#2-驱动程序编写-2)2\. 驱动程序编写
 
-### [](#21-创建adc_appc)2.1 **创建adc_app.c**
+### [](#21-创建adc_appc)2.1 **创建adc\_app.c**
 
 **变量声明**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920211129892.png)
 ```c
 #include "adc_app.h"uint32_t dma_buff[2][30];//双通道DMAfloat adc_value[2];
 ```
 
 **在主程序初始化启用DMA 转运 ADC 数据**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920211606752.png)
 
 ### [](#22-定义adc进程)2.2 **定义ADC进程**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920211903715.png)
 
 -   读取电压dma储存数据
 -   转换为模拟电压值
@@ -483,14 +476,14 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 
 ### [](#23-lcd显示)2.3 **lcd显示**
 
-![](/img/loading.gif)
+![](/posts/24028/image-20240920212245141.png)
 
 ## [](#动态窗口)\# **动态窗口**
 
 -   使用环形缓存区
 -   定义结构体
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/24028/image-20240920214629559.png) ![](/posts/24028/image-20240920214552510.png)
 
 # [](#多串口通信)多串口通信
 

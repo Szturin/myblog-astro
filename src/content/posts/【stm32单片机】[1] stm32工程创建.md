@@ -3,8 +3,6 @@ title: "【stm32单片机】[1] stm32工程创建"
 published: 2024-02-27
 updated: 2024-10-29
 category: 学习笔记
-tags:
-  - 单片机
 description: ""
 ---
 
@@ -22,9 +20,9 @@ description: ""
 #include <stm32f10x.h> 			//Device headerint main(void){	/*使用库函数的方式进行点灯操作*/	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC,ENABLE);//配置GPIOC的外设时钟	//函数的本质还是配置寄存器，但是封装好了完整可靠的功能	//不会影响到寄存器的其他位，不需要手动计算寄存器    	GPIO_InitTypeDef GPIO_InitSructure;//定义结构体变量	GPIO_InitSructure.GPIO_Mode = GPIO_Mode_Out_PP;//选择推挽输出模式	GPIO_InitSructure.GPIO_Pin = GPIO_Pin_13;//选择13号引脚	GPIO_InitSructure.GPIO_Speed = GPIO_Speed_50MHz;//GPIO最大频率50MHZ    	GPIO_Init(GPIOC,&GPIO_InitSructure);//根据配置的结构体，各个成员变量的参数，初始化GPIO口	//GPIO_SetBits(GPIOC,GPIO_Pin_13);//设置PC13口为高电平	GPIO_ResetBits(GPIOC,GPIO_Pin_13);//设置PC13口为低电平	while(1)	{			}}
 ```
 
-> 对GPIO_InitTypeDef GPIO_InitSructure的理解
+> 对GPIO\_InitTypeDef GPIO\_InitSructure的理解
 > 
-> 转到GPIO_InitTypeDef的定义
+> 转到GPIO\_InitTypeDef的定义
 
 ```c
 typedef struct{  uint16_t GPIO_Pin;             /*!< Specifies the GPIO pins to be configured.                                      This parameter can be any value of @ref GPIO_pins_define */  GPIOSpeed_TypeDef GPIO_Speed;  /*!< Specifies the speed for the selected pins.                                      This parameter can be a value of @ref GPIOSpeed_TypeDef */  GPIOMode_TypeDef GPIO_Mode;    /*!< Specifies the operating mode for the selected pins.                                      This parameter can be a value of @ref GPIOMode_TypeDef */}GPIO_InitTypeDef;

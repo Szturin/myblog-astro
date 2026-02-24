@@ -2,23 +2,16 @@
 title: "【stm32单片机】[操作系统][RT-Thread][2]线程同步"
 published: 2024-11-12
 updated: 2024-11-15
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
 # [](#rt-thread-shell)RT-Thread Shell
 
-![](/img/loading.gif)
+![](/posts/57490/image-20241112231454047.png)
 
 # [](#rt-thread定时器)RT-Thread定时器
 
-![](/img/loading.gif)
+![](/posts/57490/image-20241112231531184.png)
 
 -   软定时器：在系统线程timer中执行，通过shell可以查看到系统默认开启了一个timer进程
 -   硬定时器：回调函数在中断上下文中执行

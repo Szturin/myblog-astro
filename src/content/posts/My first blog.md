@@ -3,8 +3,6 @@ title: My first blog
 published: 2023-10-21
 updated: 2024-11-08
 category: 学习笔记
-tags:
-  - Markdown
 description: ""
 ---
 

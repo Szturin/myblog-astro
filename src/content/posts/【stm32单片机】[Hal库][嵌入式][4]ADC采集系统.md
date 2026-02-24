@@ -2,37 +2,30 @@
 title: "【stm32单片机】[Hal库][嵌入式][4]ADC采集系统"
 published: 2024-09-29
 updated: 2024-10-29
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
 # [](#vscode配置stm32编译调试环境)**\# VsCode配置STM32编译调试环境**
 
-[【保姆】vscode配置单片机编译调试烧录环境（以STM32为例）_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1BJeJehEkb/?spm_id_from=333.337.search-card.all.click&vd_source=7026df729530ac261e29b43864230918)
+[【保姆】vscode配置单片机编译调试烧录环境（以STM32为例）\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1BJeJehEkb/?spm_id_from=333.337.search-card.all.click&vd_source=7026df729530ac261e29b43864230918)
 
 # [](#一-adc采集系统)一、ADC采集系统
 
 ## [](#1-adc通道外部电路)1\. ADC通道(外部电路)
 
-![](/img/loading.gif)
+![](/posts/26676/image-20241001005738016.png)
 
 ## [](#2-功能要求)2\. 功能要求
 
-![](/img/loading.gif)
+![](/posts/26676/image-20241001005805205.png)
 
 ## [](#3-动态窗口)3\. 动态窗口
 
-![](/img/loading.gif)
+![](/posts/26676/image-20241001005817305.png)
 
 **"动态"的含义：3秒的实时采集窗口随着时间自行移动，adc采集的值动态实时更新在3s的窗口数据内**
 
-![](/img/loading.gif)
+![](/posts/26676/image-20241001010344145.png)
 
 # [](#二-功能实现)二、功能实现
 
@@ -52,11 +45,11 @@ uint8_t lcd_disp_mode;//lcd显示模式uint16_t ph_value;//PH值uint16_t pd_valu
 
 参数界面
 
-![](/img/loading.gif)
+![](/posts/26676/image-20240929225356591.png)
 
 记录界面
 
-![](/img/loading.gif)
+![](/posts/26676/image-20240929225307555.png)
 
 ### [](#22-lcd进程)2.2 **LCD进程**
 
@@ -72,7 +65,7 @@ void lcd_proc(){    switch(lcd_disp_mode){        case 0:            	LCD_Sprint
 
 **现象：如图所示，只有在对LCD写入的片段，LCD才有正常的背景**
 
-![](/img/loading.gif)
+![](/posts/26676/3ee14bc0dc0d49a3647ae193e51b544.jpg)
 
 **原因：未对LCD进行初始化清屏**
 
@@ -88,7 +81,7 @@ void lcd_proc(){    switch(lcd_disp_mode){        case 0:            	LCD_Sprint
 
 ### [](#23-led功能和初始化状态)2.3 LED功能和初始化状态
 
-![](/img/loading.gif)
+![](/posts/26676/image-20241001001209075.png)
 
 ### [](#24-lcd底层完整代码实现)2.4 LCD底层完整代码实现
 

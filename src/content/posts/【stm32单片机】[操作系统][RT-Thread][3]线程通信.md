@@ -2,13 +2,6 @@
 title: "【stm32单片机】[操作系统][RT-Thread][3]线程通信"
 published: 2024-11-12
 updated: 2024-11-15
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
@@ -44,11 +37,11 @@ description: ""
 
 **邮箱代码例程**
 
-> rt_mb_recv(mb, (rt_uint32_t\*)&msg, RT_WAITING_FOREVER); // 接收邮件
+> rt\_mb\_recv(mb, (rt\_uint32\_t\*)&msg, RT\_WAITING\_FOREVER); // 接收邮件
 > 
-> 这里RT_WAITING_FOREVER表示阻塞式等待
+> 这里RT\_WAITING\_FOREVER表示阻塞式等待
 > 
-> 改成RT_WAITING_NO则表示非阻塞式等待
+> 改成RT\_WAITING\_NO则表示非阻塞式等待
 
 ```c
 #include <rtthread.h>/* 创建邮箱 */rt_mailbox_t mb;/* 线程1：发送邮件 */void thread_entry1(void *parameter){    char msg = 'A'; // 发送字母'A'作为邮件    rt_kprintf("线程1：发送邮件...\n");    rt_mb_send(mb, (rt_uint32_t)msg); // 发送邮件}/* 线程2：接收邮件 */void thread_entry2(void *parameter){    char msg;    rt_kprintf("线程2：等待接收邮件...\n");    rt_mb_recv(mb, (rt_uint32_t*)&msg, RT_WAITING_FOREVER); // 接收邮件    rt_kprintf("线程2：收到邮件：%c\n", msg); // 打印收到的邮件内容}int main(void){    /* 创建一个容量为4的邮箱 */    mb = rt_mb_create("mb", 4, RT_IPC_FLAG_PRIO);    /* 创建两个线程 */    rt_thread_t tid1 = rt_thread_create("t1", thread_entry1, RT_NULL, 1024, 10, 10);    rt_thread_t tid2 = rt_thread_create("t2", thread_entry2, RT_NULL, 1024, 10, 10);    /* 启动线程 */    rt_thread_startup(tid1);    rt_thread_startup(tid2);    return 0;}

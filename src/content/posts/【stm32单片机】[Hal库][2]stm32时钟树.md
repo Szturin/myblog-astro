@@ -3,25 +3,18 @@ title: "【stm32单片机】[Hal库][2]stm32时钟树"
 published: 2024-08-14
 updated: 2024-10-29
 category: 学习笔记
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
 # [](#一-锁相环的原理与应用)一、锁相环的原理与应用
 
-参考文章：[【STM32】知识补充 锁相环原理与应用解析_stm32数字锁相-CSDN博客](https://blog.csdn.net/weixin_46274168/article/details/130437627)
+参考文章：[【STM32】知识补充 锁相环原理与应用解析\_stm32数字锁相-CSDN博客](https://blog.csdn.net/weixin_46274168/article/details/130437627)
 
 ## [](#什么是锁相环-ppl)什么是锁相环 (PPL)
 
 锁相环是一种闭环反馈控制系统. 用于生成与输入信号同步且[相位](https://so.csdn.net/so/search?q=%E7%9B%B8%E4%BD%8D&spm=1001.2101.3001.7020)相同的输出信号. 它的核心功能是在输入信号的相位变化时, 自动调整输出信号以保持同步. 这使得锁相环成为了一种理想的频率和相位控制技术.
 
-![](/img/loading.gif)
+![](/posts/9067/f9cb0a753bddf1fb37003ddd1310111b.png)
 
 ## [](#锁相环的基本组成)锁相环的基本组成
 

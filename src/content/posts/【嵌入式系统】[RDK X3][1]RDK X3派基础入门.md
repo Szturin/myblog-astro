@@ -2,13 +2,6 @@
 title: "【嵌入式系统】[RDK X3][1]RDK X3派基础入门"
 published: 2024-10-01
 updated: 2024-11-15
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
@@ -59,9 +52,157 @@ description: ""
 
 # [](#rdk-x3多媒体)RDK X3多媒体
 
-## [](#术语约定httpsdeveloperhorizonccdocuments_rdkmultimedia_developmentoverviewterminology)术语约定([https://developer.horizon.cc/documents_rdk/multimedia_development/overview#terminology](https://developer.horizon.cc/documents_rdk/multimedia_development/overview#terminology))
+## [](#术语约定httpsdeveloperhorizonccdocuments_rdkmultimedia_developmentoverviewterminology)术语约定([https://developer.horizon.cc/documents\_rdk/multimedia\_development/overview#terminology](https://developer.horizon.cc/documents_rdk/multimedia_development/overview#terminology))
 
-<table><thead><tr><th>缩写</th><th>全称</th><th>解释</th></tr></thead><tbody><tr><td>VIN</td><td>Video IN</td><td>包含视频处理接入、图像信号处理器、畸变矫正和防抖处理，接收来自sensor的数据并处理，也可以直接接收内存中的图像数据</td></tr><tr><td>VPS</td><td>Video Process System</td><td>包含图像旋转、图像裁剪、缩放功能，可对同一种输入源输出不同分辨率的图像。输入源可以是VIN模块，也可以是内存中的图像数据</td></tr><tr><td>VENC</td><td>Video Encode</td><td>VENC编码模块支持H.264/H.265/JPEG/MJPEG编码，VPS模块处理后的数据可通过编码模块按不同协议编码做码流输出</td></tr><tr><td>VDEC</td><td>Video Decode</td><td>VDEC解码模块支持H.264/H.265/JPEG/MJPEG解码，可对已编码的码流进行解码，交给VPS模块做进一步处理，输出到VOT模块进行显示</td></tr><tr><td>VPU</td><td>Video Processing Unit</td><td>视频处理单元，完成视频的编解码功能</td></tr><tr><td>JPU</td><td>JPEG Processing Unit</td><td>JPEG 图片处理单元，完成JPEG、MJPEG的编解码功能</td></tr><tr><td>VOT</td><td>Video Output</td><td>视频输出模块接收VPS、VDEC的图像数据，可输出到显示设备</td></tr><tr><td>VIO</td><td>Video IN/OUT</td><td>视频输入、输出，包括VIN和VOT模块</td></tr><tr><td>MIPI</td><td>Mobile Industry Processor Interface</td><td>移动产业处理器接口</td></tr><tr><td>CSI</td><td>Camera Serial Interface</td><td>相机串行接口。CSI接口与DSI接口同属一门，都是MIPI（移动产业处理器接口联盟）制定的一种接口规范</td></tr><tr><td>DVP</td><td>Digital Video Port</td><td>数字视频端口</td></tr><tr><td>SIF</td><td>Sensor Interface</td><td>sensor接口，用来接收mipi、dvp或者内存的图像数据</td></tr><tr><td>ISP</td><td>Image Signal Processor</td><td>图像信号处理器，完成图像的效果调校</td></tr><tr><td>LDC</td><td>Lens Distortion Correction</td><td>镜头畸变校正</td></tr><tr><td>DIS</td><td>Digital Image Stabilizer</td><td>数字图像稳定</td></tr><tr><td>DWE</td><td>Dewarp Engine</td><td>畸变矫正引擎，主要是将LDC和DIS集成在一起，包括LDC的畸变矫正和DIS的统计结果</td></tr><tr><td>IPU</td><td>Image Process Unit</td><td>图像信号处理单元，支持图像的旋转、图像裁剪、缩放功能</td></tr><tr><td>GDC</td><td>Geometrical Distortion Correction</td><td>几何畸变矫正</td></tr><tr><td>PYM</td><td>Pyramid</td><td>图像金字塔</td></tr><tr><td>OSD</td><td>On Screen Display</td><td>视频图像叠层显示</td></tr><tr><td>BPU</td><td>Brain Process Unit</td><td>地平线机器人自主研发的可编程AI加速引擎</td></tr><tr><td>HAL</td><td>Hardware Abstraction Layer</td><td>硬件抽象层</td></tr><tr><td>FW</td><td>Firmware</td><td>固件</td></tr><tr><td>Sensor</td><td>Sensor</td><td>如不做特别说明，特指CMOS图像传感器</td></tr></tbody></table>
+缩写
+
+全称
+
+解释
+
+VIN
+
+Video IN
+
+包含视频处理接入、图像信号处理器、畸变矫正和防抖处理，接收来自sensor的数据并处理，也可以直接接收内存中的图像数据
+
+VPS
+
+Video Process System
+
+包含图像旋转、图像裁剪、缩放功能，可对同一种输入源输出不同分辨率的图像。输入源可以是VIN模块，也可以是内存中的图像数据
+
+VENC
+
+Video Encode
+
+VENC编码模块支持H.264/H.265/JPEG/MJPEG编码，VPS模块处理后的数据可通过编码模块按不同协议编码做码流输出
+
+VDEC
+
+Video Decode
+
+VDEC解码模块支持H.264/H.265/JPEG/MJPEG解码，可对已编码的码流进行解码，交给VPS模块做进一步处理，输出到VOT模块进行显示
+
+VPU
+
+Video Processing Unit
+
+视频处理单元，完成视频的编解码功能
+
+JPU
+
+JPEG Processing Unit
+
+JPEG 图片处理单元，完成JPEG、MJPEG的编解码功能
+
+VOT
+
+Video Output
+
+视频输出模块接收VPS、VDEC的图像数据，可输出到显示设备
+
+VIO
+
+Video IN/OUT
+
+视频输入、输出，包括VIN和VOT模块
+
+MIPI
+
+Mobile Industry Processor Interface
+
+移动产业处理器接口
+
+CSI
+
+Camera Serial Interface
+
+相机串行接口。CSI接口与DSI接口同属一门，都是MIPI（移动产业处理器接口联盟）制定的一种接口规范
+
+DVP
+
+Digital Video Port
+
+数字视频端口
+
+SIF
+
+Sensor Interface
+
+sensor接口，用来接收mipi、dvp或者内存的图像数据
+
+ISP
+
+Image Signal Processor
+
+图像信号处理器，完成图像的效果调校
+
+LDC
+
+Lens Distortion Correction
+
+镜头畸变校正
+
+DIS
+
+Digital Image Stabilizer
+
+数字图像稳定
+
+DWE
+
+Dewarp Engine
+
+畸变矫正引擎，主要是将LDC和DIS集成在一起，包括LDC的畸变矫正和DIS的统计结果
+
+IPU
+
+Image Process Unit
+
+图像信号处理单元，支持图像的旋转、图像裁剪、缩放功能
+
+GDC
+
+Geometrical Distortion Correction
+
+几何畸变矫正
+
+PYM
+
+Pyramid
+
+图像金字塔
+
+OSD
+
+On Screen Display
+
+视频图像叠层显示
+
+BPU
+
+Brain Process Unit
+
+地平线机器人自主研发的可编程AI加速引擎
+
+HAL
+
+Hardware Abstraction Layer
+
+硬件抽象层
+
+FW
+
+Firmware
+
+固件
+
+Sensor
+
+Sensor
+
+如不做特别说明，特指CMOS图像传感器
 
 # [](#usb推理函数解释)USB推理函数解释
 

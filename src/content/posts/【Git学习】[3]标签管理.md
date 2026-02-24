@@ -3,13 +3,6 @@ title: "【Git学习】[3]标签管理"
 published: 2024-09-03
 updated: 2024-11-08
 category: 学习笔记
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
@@ -34,39 +27,39 @@ git branch
 ```bash
 git tag v1.0
 ```
-![](/img/loading.gif)
+![](/posts/7213/image-20240903190927707.png)
 
 查看所有标签
 
-```plaintext
+```
 git tag
 ```
-![](/img/loading.gif)
+![](/posts/7213/image-20240903191014025.png)
 
 查看历史提交
 
-```plaintext
+```
 git log --pretty=oneline --abbrev-commit
 ```
-![](/img/loading.gif)
+![](/posts/7213/image-20240903191100832.png)
 
 比如要对->“博客备份”这次打标签
 
-```plaintext
+```
 git tag v0.9 607328c
 ```
-![](/img/loading.gif)
+![](/posts/7213/image-20240903191236366.png)
 
 查看标签信息，注意：\`\`\`tag\`\`是按字母顺序排列的
 
-```plaintext
+```
 git show v0.9
 ```
-![](/img/loading.gif)
+![](/posts/7213/image-20240903191323368.png)
 
 还可以创建带有说明的标签，用`-a`指定标签名，`-m`指定说明文字：
 
-```plaintext
+```
 git tag -a v0.1 -m "version 0.1 released" 1094adb
 ```
 
@@ -76,19 +69,19 @@ git tag -a v0.1 -m "version 0.1 released" 1094adb
 
 注意：对标签的操作都在本地，不会影响远程
 
-```plaintext
+```
 git tag -d v0.1
 ```
 
 如果要推送标签到远程仓库，使用：
 
-```plaintext
+```
 git push origin v1.0
 ```
 
 一次性推送全部尚未推送到远程的标签
 
-```plaintext
+```
 git push origin --tags
 ```
 
@@ -96,7 +89,7 @@ git push origin --tags
 
 1.删除本地标签
 
-```plaintext
+```
 git tag -d v0.9
 ```
 
@@ -104,6 +97,6 @@ git tag -d v0.9
 
 格式：:refs/tags/
 
-```plaintext
+```
 git push origin :refs/tags/v0.9
 ```

@@ -3,13 +3,6 @@ title: "【stm32单片机】[Hal库][1]Hal库初始化配置"
 published: 2024-06-09
 updated: 2024-11-08
 category: 学习笔记
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
@@ -23,15 +16,15 @@ description: ""
 
 ## [](#1cubemx安装芯片固件包)1.CubeMX安装芯片固件包
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609153709278.png)
 
-xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO_InitTypeDef的名字{}GPIO_InitTypeDef;c
+xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO\_InitTypeDef的名字{}GPIO\_InitTypeDef;c
 
 **像常用的stm32f103c8t6，我们就选择STM32F1，勾选最新固件包，点击Install Now进行在线安装**
 
 * * *
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609155414174.png)
 
 * * *
 
@@ -43,13 +36,13 @@ xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO_InitTypeDe
 
 ## [](#3引脚配置)3.引脚配置
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609154359188.png)
 
 ## [](#3外设配置)3.外设配置
 
 GPIO属性配置
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609155305797.png)
 
 > GPIO output level > High 输出等级 高
 > 
@@ -59,23 +52,23 @@ GPIO属性配置
 > 
 > User Label > 用户标签，方便代码中使用，如图：
 > 
-> ​ ![](/img/loading.gif)
+> ​ ![](/posts/253/image-20240609154825836.png)
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609154611816.png)
 
 配置时钟模式
 
 Pinout & Configuration > A-Z > RCC > High Speed Clock  
 Crystal/Ceramic Resonator 使用外部时钟源
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609155203231.png)
 
 时钟可视化配置
 
 Clock Configuration  
 选中HSE,倍频x9，不分频
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609154912764.png)
 
 ## [](#4工程设置)4.工程设置
 
@@ -87,17 +80,17 @@ Clock Configuration
 > 
 > 勾选 Use latest available version
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609155924976.png)
 
 > Project Manager > Code Generator
 > 
 > 勾选Generate peripheral…
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609160038284.png)
 
 > 其余默认配置即可
 
-![](/img/loading.gif)
+![](/posts/253/image-20240609160159606.png)
 
 > GENERATE CODE生成代码，Open Project
 
@@ -109,6 +102,6 @@ int main(void){/* USER CODE BEGIN 1 */  HAL_Init();//HAL库初始化  SystemCloc
 
 __\==注意： /_ USER CODE BEGIN 3 _/之内的代码不会杯CubeMX重新生成代码时覆盖掉！ /_ USER CODE END 3 _/==__
 
-![](/img/loading.gif) ![](/img/loading.gif)
+![](/posts/253/image-20240609160459831.png) ![](/posts/253/image-20240609160610985.png)
 
 下载后编译，观察PA5引脚电平变化（利用LED），是否以0.5s周期变化

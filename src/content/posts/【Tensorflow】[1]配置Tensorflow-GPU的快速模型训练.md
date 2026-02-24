@@ -3,17 +3,10 @@ title: "【Tensorflow】[1]配置Tensorflow-GPU的快速模型训练"
 published: 2024-08-11
 updated: 2024-11-08
 category: 项目
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 
-author: sz_jmu
+author: sz\_jmu
 
 # [](#前言)前言
 
@@ -25,7 +18,7 @@ TensorFlow可以支持CPU，也可以支持CPU+GPU，前者配置较为简单，
 
 参考文章：
 
-[解决tensorflow-gpu版本训练loss一直为nan，或者loss，accuracy数值明显不对问题_采用gpu训练 loss为负数 采用cpu训练正常-CSDN博客](https://blog.csdn.net/Sciws/article/details/125290718)
+[解决tensorflow-gpu版本训练loss一直为nan，或者loss，accuracy数值明显不对问题\_采用gpu训练 loss为负数 采用cpu训练正常-CSDN博客](https://blog.csdn.net/Sciws/article/details/125290718)
 
 注意：配置Tensorflow gpu版本，建议使用Anoconda创建环境，避免出现污染环境变量等问题，Anoconda的配置与使用，不做过多赘述。
 
@@ -61,9 +54,9 @@ conda install cudnn=8.2.1
 conda install tensorflow-gpu=2.7.0
 ```
 
-**安装完成后，在tf_gpu_1环境中，检查是否能够查找到显卡驱动**
+**安装完成后，在tf\_gpu\_1环境中，检查是否能够查找到显卡驱动**
 
-```plaintext
+```
 nvidia-smi
 ```
 
@@ -71,7 +64,7 @@ nvidia-smi
 
 1.进入python命令行环境
 
-```plaintext
+```
 python
 ```
 
@@ -109,13 +102,13 @@ print("是否有 GPU 设备:", len(tf.config.list_physical_devices('GPU')) > 0)
 │ │ ├── 七  
 │ │ ├── 万  
 │ │ └── …  
-│ └── label_character.csv
+│ └── label\_character.csv
 
 ## [](#2编写tensorflow工具链与使用说明)2.编写Tensorflow工具链与使用说明
 
 准备好数据集后，我们首先要做的工作是对数据集进行处理，使其符合神经网络模型训练的规范格式，其次，也有一些通过程序的方法能够对原始数据集进行处理，增加数据集的多样性，我们使用的方法为“数据增强”，即在原始数据集的基础上，对每张图片进行小幅度旋转，对比度调节，平移，压缩，放大等操作，这样有利于提高最后训练的模型的泛化性。
 
-注意：代码运行需要在在命令行的本例：tf_gpu_1的环境中运行
+注意：代码运行需要在在命令行的本例：tf\_gpu\_1的环境中运行
 
 ### [](#21数据集划分脚本)2.1**数据集划分脚本**
 
@@ -135,11 +128,11 @@ print("是否有 GPU 设备:", len(tf.config.list_physical_devices('GPU')) > 0)
 src_data_folder = "S:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/CursiveChineseCalligraphyDataset-master/Cursive_Chinese_Calligraphy_Dataset/Training"  # todo 修改你的原始数据集路径target_data_folder = "s:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/data-chinese-caoshu"  #
 ```
 
-其中src_data_folder为原始数据集路径，target_data_folder为划分好的目标路径(将包含train,val,test三个子文件夹)
+其中src\_data\_folder为原始数据集路径，target\_data\_folder为划分好的目标路径(将包含train,val,test三个子文件夹)
 
-在tf_gpu_1环境下，输入命令 python data_split.py
+在tf\_gpu\_1环境下，输入命令 python data\_split.py
 
-**完整代码(data_split.py)如下：**
+**完整代码(data\_split.py)如下：**
 
 ```python
 import osimport randomfrom shutil import copy2, movefrom concurrent.futures import ThreadPoolExecutorfrom tqdm import tqdmfrom PIL import Image, ImageEnhancedef copy_file(src_dest):    src_img_path, target_folder = src_dest    copy2(src_img_path, target_folder)def move_file(src_dest):    src_img_path, target_folder = src_dest    move(src_img_path, target_folder)def augment_image(src_img_path, target_folder, num_augments=5):    img = Image.open(src_img_path)    for i in range(num_augments):        img_aug = img.copy()        # 随机旋转        angle = random.uniform(-15, 15)  # -15到15度之间的随机旋转        img_aug = img_aug.rotate(angle, fillcolor='white')        # 随机平移        max_translate = 5  # 最大平移像素值        x_translate = random.randint(-max_translate, -max_translate)        y_translate = random.randint(-max_translate, -max_translate)        img_aug = img_aug.transform(img_aug.size, Image.AFFINE, (1, 0, x_translate, 0, 1, y_translate),                                    fillcolor='white')        # 随机缩放        scale_factor = random.uniform(0.9, 1.1)        w, h = img_aug.size        img_aug = img_aug.resize((int(w * scale_factor), int(h * scale_factor)), Image.Resampling.LANCZOS)        img_aug = img_aug.resize((w, h), Image.Resampling.LANCZOS)  # 重新调整为原始尺寸        # 随机对比度调整        enhancer = ImageEnhance.Contrast(img_aug)        img_aug = enhancer.enhance(random.uniform(0.8, 1.2))        # 随机亮度调整        enhancer = ImageEnhance.Brightness(img_aug)        img_aug = enhancer.enhance(random.uniform(0.8, 1.2))        # 保存增强后的图像        aug_img_name = os.path.basename(src_img_path).replace(".", f"_aug_{i}.")        img_aug.save(os.path.join(target_folder, aug_img_name))def data_set_split_and_augment(src_data_folder, target_data_folder, train_scale=0.8, val_scale=0.2, test_scale=0.0,                               num_augments=5):    '''    读取源数据文件夹，生成划分好的文件夹，并对每张图片生成5张增强图片。    :param src_data_folder: 源文件夹    :param target_data_folder: 目标文件夹    :param train_scale: 训练集比例    :param val_scale: 验证集比例    :param test_scale: 测试集比例    :param num_augments: 每张图片生成的增强图片数量    :return:    '''    class_names = os.listdir(src_data_folder)    split_names = ['train', 'val', 'test']    data_split_completed = True    # 检查目标文件夹是否已存在文件，如果存在则跳过数据集划分    for split_name in split_names:        split_path = os.path.join(target_data_folder, split_name)        if not os.path.exists(split_path) or len(os.listdir(split_path)) == 0:            data_split_completed = False            break    if not data_split_completed:        print("开始数据集划分")        # 在目标目录下创建文件夹        for split_name in split_names:            split_path = os.path.join(target_data_folder, split_name)            os.makedirs(split_path, exist_ok=True)            # 在split_path的目录下创建类别文件夹            for class_name in class_names:                class_split_path = os.path.join(split_path, class_name)                os.makedirs(class_split_path, exist_ok=True)        tasks = []        total_files = 0        # 计算总文件数并生成任务列表        for class_name in class_names:            current_class_data_path = os.path.join(src_data_folder, class_name)            current_all_data = os.listdir(current_class_data_path)            total_files += len(current_all_data)            random.shuffle(current_all_data)            train_folder = os.path.join(os.path.join(target_data_folder, 'train'), class_name)            val_folder = os.path.join(os.path.join(target_data_folder, 'val'), class_name)            test_folder = os.path.join(os.path.join(target_data_folder, 'test'), class_name)            train_stop_flag = len(current_all_data) * train_scale            val_stop_flag = len(current_all_data) * (train_scale + val_scale)            for idx, img_name in enumerate(current_all_data):                src_img_path = os.path.join(current_class_data_path, img_name)                if idx <= train_stop_flag:                    tasks.append((src_img_path, train_folder))                elif idx <= val_stop_flag:                    tasks.append((src_img_path, val_folder))                else:                    tasks.append((src_img_path, test_folder))        # 使用多线程进行复制，并显示进度条        with ThreadPoolExecutor(max_workers=8) as executor:            list(tqdm(executor.map(copy_file, tasks), total=total_files, desc="文件复制进度"))        print("数据集划分完成！")    else:        print("数据集划分已经完成，跳过该步骤。")    # 第二阶段：数据增强    data_augmentation_completed = True    for class_name in class_names:        train_class_folder = os.path.join(target_data_folder, 'train', class_name)        if not any("_aug_" in fname for fname in os.listdir(train_class_folder)):            data_augmentation_completed = False            break    if not data_augmentation_completed:        print("开始数据增强")        aug_tasks = []        for split_name in split_names:            split_folder = os.path.join(target_data_folder, split_name)            for class_name in class_names:                class_split_folder = os.path.join(split_folder, class_name)                for img_name in os.listdir(class_split_folder):                    if "_aug_" in img_name:  # 检查是否已经增强过                        src_img_path = os.path.join(class_split_folder, img_name)                        aug_tasks.append((src_img_path, class_split_folder, num_augments))        with ThreadPoolExecutor(max_workers=8) as executor:            list(tqdm(executor.map(lambda x: augment_image(*x), aug_tasks), total=len(aug_tasks), desc="数据增强进度"))        print("数据增强完成！")    else:        print("数据增强已经完成，跳过该步骤。")    # 第三阶段：检查并补充val文件夹中的内容    print("开始检查并补充val文件夹")    supplement_tasks = []    for class_name in class_names:        val_class_folder = os.path.join(target_data_folder, 'val', class_name)        train_class_folder = os.path.join(target_data_folder, 'train', class_name)        val_files = os.listdir(val_class_folder)        train_files = os.listdir(train_class_folder)        if len(val_files) == 0 or len(val_files) < len(train_files) * 0.1:            num_to_move = max(1, int(len(train_files) * 0.1))            random.shuffle(train_files)            files_to_move = train_files[:num_to_move]            for file_name in files_to_move:                src_img_path = os.path.join(train_class_folder, file_name)                supplement_tasks.append((src_img_path, val_class_folder))    with ThreadPoolExecutor(max_workers=8) as executor:        list(tqdm(executor.map(move_file, supplement_tasks), total=len(supplement_tasks), desc="补充val文件夹进度"))    print("val文件夹补充完成！")if __name__ == '__main__':    src_data_folder = "S:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/CursiveChineseCalligraphyDataset-master/Cursive_Chinese_Calligraphy_Dataset/Training"  # todo 修改你的原始数据集路径    target_data_folder = "s:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/data-chinese-caoshu"  # todo 修改为你要存放的路径    data_set_split_and_augment(src_data_folder, target_data_folder, num_augments=5)
@@ -151,9 +144,9 @@ import osimport randomfrom shutil import copy2, movefrom concurrent.futures impo
 
 使用方法：
 
-在tf_gpu_1环境下使用命令 python labels_get.py运行此代码，将在代码相同目录下生成标签文件
+在tf\_gpu\_1环境下使用命令 python labels\_get.py运行此代码，将在代码相同目录下生成标签文件
 
-**完整代码(labels_get)如下**
+**完整代码(labels\_get)如下**
 
 ```python
 import tensorflow as tffrom pathlib import Path# 数据集加载函数def load_chinese_dataset(data_dir):    # 使用 pathlib 处理路径    data_dir = Path(data_dir).resolve()    # 加载数据集，获取类别标签和图像数据    dataset = tf.keras.preprocessing.image_dataset_from_directory(        str(data_dir),        label_mode='int',  # 使用整数标签        seed=123,        batch_size=32,  # 根据内存大小调整批量大小        image_size=(256, 256)  # 根据需要调整图像大小    )    # 提取类别标签    class_names = dataset.class_names    # 打印类别标签    print("类别标签（中文）：", class_names)    # 保存标签到 Python 文件    labels_file_path = Path(data_dir).parent / "lables_caoshu.py"    with open(labels_file_path, 'w', encoding='utf-8') as file:        file.write("labels_caoshu = [\n")        for label in class_names:            file.write(f"    '{label}',\n")        file.write("]\n")    print(f"标签已保存到 {labels_file_path}")    # 返回数据集和标签    return dataset, class_names# 示例：使用指定路径加载汉字数据集if __name__ == '__main__':    data_dir = r"S:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/data-chinese-caoshu/train"    dataset, chinese_labels = load_chinese_dataset(data_dir)    # 打印一些样本数据    for images, labels in dataset.take(1):        print("图像批次：", images.numpy())        print("标签批次：", labels.numpy())
@@ -185,7 +178,7 @@ train_ds, val_ds, class_names = data_load(    r"s:/2_tensflow_Project/chinese-ca
 model.save("models/final_resnet50_chinese_kai", save_format='tf')
 ```
 
-在tf_gpu_1环境下，使用命令 python model_train_resnet50.py
+在tf\_gpu\_1环境下，使用命令 python model\_train\_resnet50.py
 
 ```python
 import tensorflow as tfimport matplotlib.pyplot as pltfrom time import timefrom pathlib import Pathimport os# 设置环境变量以确保使用 UTF-8 编码os.environ['PYTHONIOENCODING'] = 'utf-8'os.environ['LANG'] = 'zh_CN.UTF-8'# 启用混合精度训练from tensorflow.keras.mixed_precision import experimental as mixed_precisionpolicy = mixed_precision.Policy('mixed_float16')mixed_precision.set_policy(policy)# 数据加载函数，加入数据增强def data_load(data_dir, test_data_dir, img_height, img_width, batch_size):    data_dir = Path(data_dir).resolve()    test_data_dir = Path(test_data_dir).resolve()    # 加载训练集    train_ds = tf.keras.preprocessing.image_dataset_from_directory(        str(data_dir),        label_mode='categorical',        seed=123,        image_size=(img_height, img_width),        batch_size=batch_size    )    # 获取类别标签    class_names = train_ds.class_names    # 数据增强    data_augmentation = tf.keras.Sequential([        tf.keras.layers.experimental.preprocessing.RandomFlip('horizontal'),        tf.keras.layers.experimental.preprocessing.RandomRotation(0.1),    ])    # 加入数据增强    train_ds = train_ds.map(lambda x, y: (data_augmentation(x), y), num_parallel_calls=tf.data.experimental.AUTOTUNE)    # 加载测试集    val_ds = tf.keras.preprocessing.image_dataset_from_directory(        str(test_data_dir),        label_mode='categorical',        seed=123,        image_size=(img_height, img_width),        batch_size=batch_size    )    # 预取数据    train_ds = train_ds.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)    val_ds = val_ds.prefetch(buffer_size=tf.data.experimental.AUTOTUNE)    return train_ds, val_ds, class_names# 构建ResNet模型def model_load(IMG_SHAPE=(128, 128, 3), class_num=7200):    resnet = tf.keras.applications.ResNet50(weights='imagenet', include_top=False, input_shape=IMG_SHAPE)    model = tf.keras.models.Sequential([        resnet,        tf.keras.layers.GlobalAveragePooling2D(),        tf.keras.layers.Dense(1024, activation='relu'),        tf.keras.layers.Dropout(0.5),        tf.keras.layers.Dense(class_num, activation='softmax')    ])    model.summary()    initial_learning_rate = 0.01    lr_schedule = tf.keras.optimizers.schedules.ExponentialDecay(        initial_learning_rate, decay_steps=10000, decay_rate=0.9, staircase=True    )    optimizer = tf.keras.optimizers.SGD(learning_rate=lr_schedule, momentum=0.9)    model.compile(optimizer=optimizer,                  loss='categorical_crossentropy',                  metrics=['accuracy'])    return model# 展示训练过程的曲线def show_loss_acc(history):    acc = history.history['accuracy']    val_acc = history.history['val_accuracy']    loss = history.history['loss']    val_loss = history.history['val_loss']    plt.figure(figsize=(8, 8))    plt.subplot(2, 1, 1)    plt.plot(acc, label='Training Accuracy')    plt.plot(val_acc, label='Validation Accuracy')    plt.legend(loc='lower right')    plt.ylabel('Accuracy')    plt.ylim([min(plt.ylim()), 1])    plt.title('Training and Validation Accuracy')    plt.subplot(2, 1, 2)    plt.plot(loss, label='Training Loss')    plt.plot(val_loss, label='Validation Loss')    plt.legend(loc='upper right')    plt.ylabel('Cross Entropy')    plt.title('Training and Validation Loss')    plt.xlabel('epoch')    plt.savefig('results/results_resnet.png', dpi=100)# 增加早停和模型检查点回调def train(epochs):    begin_time = time()    train_ds, val_ds, class_names = data_load(        r"s:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/data-chinese-caoshu/train",        r"s:/2_tensflow_Project/chinese-calligraphy-dataset-master/data/data-chinese-caoshu/val",        128, 128, 64)  # 减小批处理大小    print("类别标签（中文）：", class_names)    model = model_load(class_num=len(class_names))    early_stopping = tf.keras.callbacks.EarlyStopping(        monitor='val_loss', patience=10, restore_best_weights=True    )    checkpoint = tf.keras.callbacks.ModelCheckpoint(        'models/final_resnet50_chinese_kai', monitor='val_loss', save_best_only=True, save_format='tf'    )    history = model.fit(        train_ds, validation_data=val_ds, epochs=epochs,        callbacks=[early_stopping, checkpoint]    )    model.save("models/final_resnet50_chinese_kai", save_format='tf')    end_time = time()    run_time = end_time - begin_time    print('该循环程序运行时间：', run_time, "s")    show_loss_acc(history)if __name__ == '__main__':    train(epochs=15)
@@ -201,7 +194,7 @@ import tensorflow as tfimport matplotlib.pyplot as pltimport numpy as npimport o
 
 ### [](#25-tensorboard工具模型流图)2.5 tensorboard工具——模型流图
 
-model = tf.saved_model.load(“models/final_resnet50_chinese”) 语句中修改为目标模型
+model = tf.saved\_model.load(“models/final\_resnet50\_chinese”) 语句中修改为目标模型
 
 ```python
 import tensorflow as tf# 假设你已经加载了你的模型model = tf.saved_model.load("models/final_resnet50_chinese")# 获取模型的推理签名（与导出的模型相关，可能需要调整具体签名名称）infer = model.signatures['serving_default']# 创建 TensorBoard 日志目录log_dir = "logs/graph"writer = tf.summary.create_file_writer(log_dir)# 创建一个包装函数并使用 tf.function@tf.functiondef model_inference(input_tensor):    return infer(input_tensor)# 创建一个示例输入张量（调整形状以匹配模型的输入要求）example_input = tf.random.normal([1, 160, 160, 3])  # 假设模型输入是160x160x3的图像# 记录数据流图with writer.as_default():    # 开启追踪    tf.summary.trace_on(graph=True, profiler=True)    # 执行一次推理以记录计算图    model_inference(example_input)    # 记录计算图    tf.summary.trace_export(name="model_trace", step=0, profiler_outdir=log_dir)    writer.flush()print("Graph has been written to TensorBoard logs. You can view it using TensorBoard.")
@@ -217,15 +210,15 @@ import tensorflow as tf# 假设你已经加载了你的模型model = tf.saved_mo
 
 **运行结果如下：**
 
-tensorflow_gpu_tools工具链总结：
+tensorflow\_gpu\_tools工具链总结：
 
--   data_split.py：数据集划分脚本
+-   data\_split.py：数据集划分脚本
     
--   labels_get.py：标签生成脚本
+-   labels\_get.py：标签生成脚本
     
--   model_train_resnet50.py：训练脚本
+-   model\_train\_resnet50.py：训练脚本
     
--   tf_board.py：模型结构/流图展示脚本
+-   tf\_board.py：模型结构/流图展示脚本
     
 -   [window.py](http://window.py)：模型识别QT程序
     
@@ -236,12 +229,12 @@ tensorflow_gpu_tools工具链总结：
 
 > date:2024.8.29
 > 
-> 对**model_train_densenet169.py** 新增**参数接口化**配置，使用**命令行**即可便捷配置模型训练参数
+> 对**model\_train\_densenet169.py** 新增**参数接口化**配置，使用**命令行**即可便捷配置模型训练参数
 > 
 > ```python
 > import argparse                          # 导入argparse模块以处理命令行参数
 > ```
-> ![](/img/loading.gif)
+> ![](/posts/33676/image-20240830003108581.png)
 > 
 > 如：
 > 

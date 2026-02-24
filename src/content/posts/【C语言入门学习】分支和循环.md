@@ -3,8 +3,6 @@ title: "【C语言入门学习】分支和循环"
 published: 2024-02-23
 updated: 2024-11-08
 category: 学习笔记
-tags:
-  - C语言
 description: ""
 ---
 
@@ -67,7 +65,7 @@ switch中break的实际作用是把语句列表划分为不同的分支部分，
 ```bash
 #define _CRT_SECURE_NO_WARNINGS 1#include<stdio.h>int main(){	int i = 0;	do	{		printf("hi\n");		i++;	} while (i < 5);}
 ```
-```plaintext
+```
 运行结果：hihihihihi
 ```
 
@@ -113,7 +111,7 @@ switch中break的实际作用是把语句列表划分为不同的分支部分，
 ```bash
 #define _CRT_SECURE_NO_WARNINGS 1#include<stdio.h>int main(){	//getchar() 获取一个字符	//EOF end of file 文件结束的标识	//putchar() 输出一个字符	//int ch = getchar();	//putchar(ch);	int ch = 0;	while ((ch = getchar()) != EOF)	{		putchar(ch);	}	return 0;	//ctrl + z 读取到EOF结束}
 ```
-```plaintext
+```
 运行结果：aavvcc^ZD:\2_c++_项目\0_C_Project\01 分支和循环\Release\01 选择结构.exe (进程 39324)已退出，代码为 0。
 ```
 

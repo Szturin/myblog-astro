@@ -3,13 +3,6 @@ title: "【ROS2】[2]ROS2节点的编写"
 published: 2024-07-09
 updated: 2024-11-08
 category: 学习笔记
-tags:
-  - 算法
-  - 计算机语言
-  - 机器人
-  - 单片机
-  - EDA
-  - 电子技术学习
 description: ""
 ---
 

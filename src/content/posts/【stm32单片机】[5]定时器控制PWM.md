@@ -4,45 +4,49 @@ published: 2024-03-05
 updated: 2024-09-03
 category: 学习笔记
 description: ""
+tags:
+  - STM32
+  - 嵌入式软件
+  - 单片机
 ---
 
 > **配置结构体初始化输出比较单元**
 > 
-> void TIM\_OC1Init(TIM\_TypeDef\* TIMx, TIM\_OCInitTypeDef\* TIM\_OCInitStruct);  
-> void TIM\_OC2Init(TIM\_TypeDef\* TIMx, TIM\_OCInitTypeDef\* TIM\_OCInitStruct);  
-> void TIM\_OC3Init(TIM\_TypeDef\* TIMx, TIM\_OCInitTypeDef\* TIM\_OCInitStruct);  
-> void TIM\_OC4Init(TIM\_TypeDef\* TIMx, TIM\_OCInitTypeDef\* TIM\_OCInitStruct);
+> void TIM_OC1Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);  
+> void TIM_OC2Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);  
+> void TIM_OC3Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);  
+> void TIM_OC4Init(TIM_TypeDef* TIMx, TIM_OCInitTypeDef* TIM_OCInitStruct);
 > 
 > **设置结构体初始值**
 > 
-> void TIM\_OCStructInit(TIM\_OCInitTypeDef\* TIM\_OCInitStruct);
+> void TIM_OCStructInit(TIM_OCInitTypeDef* TIM_OCInitStruct);
 > 
 > * * *
 > 
-> **\*配置强制输出**
+> ***配置强制输出**
 > 
-> void TIM\_ForcedOC1Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);  
-> void TIM\_ForcedOC2Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);  
-> void TIM\_ForcedOC3Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);  
-> void TIM\_ForcedOC4Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);
+> void TIM_ForcedOC1Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);  
+> void TIM_ForcedOC2Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);  
+> void TIM_ForcedOC3Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);  
+> void TIM_ForcedOC4Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);
 > 
-> **\*配置影子寄存器**
+> ***配置影子寄存器**
 > 
-> void TIM\_ForcedOC1Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);  
-> void TIM\_ForcedOC2Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);  
-> void TIM\_ForcedOC3Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);  
-> void TIM\_ForcedOC4Config(TIM\_TypeDef\* TIMx, uint16\_t TIM\_ForcedAction);
+> void TIM_ForcedOC1Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);  
+> void TIM_ForcedOC2Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);  
+> void TIM_ForcedOC3Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);  
+> void TIM_ForcedOC4Config(TIM_TypeDef* TIMx, uint16_t TIM_ForcedAction);
 > 
-> **\*配置快速使能**
+> ***配置快速使能**
 > 
-> xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO\_InitTypeDef的名字{}GPIO\_InitTypeDef;c
+> xxxxxxxxxx typedef struct//typedef为成员列表提供了一个GPIO_InitTypeDef的名字{}GPIO_InitTypeDef;c
 > 
-> **\*清除REF信号**
+> ***清除REF信号**
 > 
-> void TIM\_ClearOC1Ref(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCClear);  
-> void TIM\_ClearOC2Ref(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCClear);  
-> void TIM\_ClearOC3Ref(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCClear);  
-> void TIM\_ClearOC4Ref(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCClear);
+> void TIM_ClearOC1Ref(TIM_TypeDef* TIMx, uint16_t TIM_OCClear);  
+> void TIM_ClearOC2Ref(TIM_TypeDef* TIMx, uint16_t TIM_OCClear);  
+> void TIM_ClearOC3Ref(TIM_TypeDef* TIMx, uint16_t TIM_OCClear);  
+> void TIM_ClearOC4Ref(TIM_TypeDef* TIMx, uint16_t TIM_OCClear);
 > 
 > **配置输出极性**
 > 
@@ -52,33 +56,33 @@ description: ""
 > > 
 > > 结构体初始化中也可以设置极性
 > 
-> void TIM\_OC1PolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCPolarity);  
-> void TIM\_OC1NPolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCNPolarity);  
-> void TIM\_OC2PolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCPolarity);  
-> void TIM\_OC2NPolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCNPolarity);  
-> void TIM\_OC3PolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCPolarity);  
-> void TIM\_OC3NPolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCNPolarity);  
-> void TIM\_OC4PolarityConfig(TIM\_TypeDef\* TIMx, uint16\_t TIM\_OCPolarity);
+> void TIM_OC1PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);  
+> void TIM_OC1NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity);  
+> void TIM_OC2PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);  
+> void TIM_OC2NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity);  
+> void TIM_OC3PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);  
+> void TIM_OC3NPolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCNPolarity);  
+> void TIM_OC4PolarityConfig(TIM_TypeDef* TIMx, uint16_t TIM_OCPolarity);
 > 
-> void TIM\_CCxCmd(TIM\_TypeDef\* TIMx, uint16\_t TIM\_Channel, uint16\_t TIM\_CCx);  
-> void TIM\_CCxNCmd(TIM\_TypeDef\* TIMx, uint16\_t TIM\_Channel, uint16\_t TIM\_CCxN);
+> void TIM_CCxCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCx);  
+> void TIM_CCxNCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCxN);
 > 
 > **单独修改输出使能参数**
 > 
-> void TIM\_CCxCmd(TIM\_TypeDef\* TIMx, uint16\_t TIM\_Channel, uint16\_t TIM\_CCx);  
-> void TIM\_CCxNCmd(TIM\_TypeDef\* TIMx, uint16\_t TIM\_Channel, uint16\_t TIM\_CCxN);
+> void TIM_CCxCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCx);  
+> void TIM_CCxNCmd(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_CCxN);
 > 
 > **单独更改输出比较模式**
 > 
-> void TIM\_SelectOCxM(TIM\_TypeDef\* TIMx, uint16\_t TIM\_Channel, uint16\_t TIM\_OCMode);
+> void TIM_SelectOCxM(TIM_TypeDef* TIMx, uint16_t TIM_Channel, uint16_t TIM_OCMode);
 > 
 > **单独更改CCR寄存器的函数**
 > 
-> void TIM\_SetCompare1(TIM\_TypeDef\* TIMx, uint16\_t Compare1);  
-> void TIM\_SetCompare2(TIM\_TypeDef\* TIMx, uint16\_t Compare2);  
-> void TIM\_SetCompare3(TIM\_TypeDef\* TIMx, uint16\_t Compare3);  
-> void TIM\_SetCompare4(TIM\_TypeDef\* TIMx, uint16\_t Compare4);
+> void TIM_SetCompare1(TIM_TypeDef* TIMx, uint16_t Compare1);  
+> void TIM_SetCompare2(TIM_TypeDef* TIMx, uint16_t Compare2);  
+> void TIM_SetCompare3(TIM_TypeDef* TIMx, uint16_t Compare3);  
+> void TIM_SetCompare4(TIM_TypeDef* TIMx, uint16_t Compare4);
 > 
 > **高级定时器，使能PWM，否则无法正常输出**
 > 
-> void TIM\_CtrlPWMOutputs(TIM\_TypeDef\* TIMx, FunctionalState NewState);
+> void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState);

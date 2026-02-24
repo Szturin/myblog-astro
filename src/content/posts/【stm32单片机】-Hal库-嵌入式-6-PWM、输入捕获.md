@@ -3,15 +3,20 @@ title: "【stm32单片机】-Hal库-嵌入式-6-PWM、输入捕获"
 published: 2024-10-15
 updated: 2024-10-29
 description: ""
+category: 学习笔记
+tags:
+  - STM32
+  - 嵌入式软件
+  - HAL库
 ---
 
-# [](#按键状态机与回调函数的封装思想)\# 按键状态机与回调函数的封装思想
+# 按键状态机与回调函数的封装思想
 
-# [](#一-pwm配置)一、PWM配置
+# 一、PWM配置
 
 > 生成频率为1000HZ的PWM信号，占空比可调
 
-## [](#1-cubemx配置)1\. CubeMX配置
+## 1. CubeMX配置
 
 -   选择Internal(内部时钟)
 
@@ -27,9 +32,9 @@ description: ""
 
 ![](/posts/12030/image-20241015223259551.png)
 
-# [](#二-输入捕获)二、输入捕获
+# 二、输入捕获
 
-## [](#1-cubemx配置-2)1\. CubeMX配置
+## 1. CubeMX配置
 
 ![](/posts/12030/image-20241015230019438.png)
 

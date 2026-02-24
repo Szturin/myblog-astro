@@ -3,13 +3,19 @@ title: "【stm32单片机】[Hal库][嵌入式][3]UART、DMA、ADC"
 published: 2024-09-15
 updated: 2024-12-15
 description: ""
+category: 学习笔记
+tags:
+  - STM32
+  - 嵌入式软件
+  - HAL库
+  - 通信协议
 ---
 
-# [](#一-串口中断超时解析)一、串口中断+超时解析
+# 一、串口中断+超时解析
 
-## [](#1-cubemx配置)1\. CubeMX配置
+## 1. CubeMX配置
 
-## [](#11-属性配置)1.1 **属性配置**
+## 1.1 **属性配置**
 
 主要配置波特率，其余默认
 
@@ -34,24 +40,28 @@ DMA的模式：
 
 ![](/posts/24028/image-20240919224441445.png) ![](/posts/24028/image-20240919224501610.png)
 
-## [](#2-驱动程序编写)2\. 驱动程序编写
+## 2. 驱动程序编写
 
-### [](#21-串口重定向)2.1 串口重定向
+### 2.1 串口重定向
 
 **在uasrt.c中进行修改**
 
 ![](/posts/24028/image-20240919225413251.png)
 ```c
-int fputc(int ch, FILE * str){	HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,10);    return ch;}
+int fputc(int ch, FILE * str)
+{
+	HAL_UART_Transmit(&huart1,(uint8_t *)&ch,1,10);
+    return ch;
+}
 ```
-
-### [](#22-app_uartc-变量定义)2.2 **app\_uart.c 变量定义**
+### 2.2 **app_uart.c 变量定义**
 
 ```c
-uint16_t uart_rx_index = 0;uint16_t uart_tx_ticks = 0;uint8_t uart_rx_buffer[128]={0};
+uint16_t uart_rx_index = 0;
+uint16_t uart_tx_ticks = 0;
+uint8_t uart_rx_buffer[128]={0};
 ```
-
-### [](#23-中断初始化)2.3 **中断初始化**
+### 2.3 **中断初始化**
 
 放入Core->Src->usart.c中
 
@@ -66,7 +76,7 @@ HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
 > 
 > 在 STM32 的 HAL（硬件抽象层）库中，**中断回调函数**用于处理各种外设的中断事件。这些回调函数由 HAL 库提供，用户只需实现这些函数以响应特定的中断。
 > 
-> ### [](#1-一般函数-vs-回调函数)1\. **一般函数 vs. 回调函数**
+> ### [](#1-一般函数-vs-回调函数)1. **一般函数 vs. 回调函数**
 > 
 > -   **逻辑限定普通函数的调用**：
 >     
@@ -87,7 +97,7 @@ HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
 >     ```
 >     
 > 
-> ### [](#2-中断函数-vs-回调函数)2\. **中断函数 vs. 回调函数**
+> ### [](#2-中断函数-vs-回调函数)2. **中断函数 vs. 回调函数**
 > 
 > -   **中断函数**：
 >     -   直接处理外设中断的代码，通常是在中断服务例程 (ISR) 中实现。
@@ -98,7 +108,7 @@ HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
 >     -   HAL 库提供的回调函数允许用户定义中断后要执行的操作，而不需要直接修改中断服务例程。
 >     -   更易于维护和调试，因为用户只需关注回调函数的逻辑，而不需要管理中断相关的低层实现。
 
-### [](#24-回调函数声明)2.4 回调函数声明
+### 2.4 回调函数声明
 
 **弱定义**
 
@@ -108,31 +118,50 @@ HAL_UART_Receive_IT(&huart1,uart_rx_buffer,1);
 
 可以自行声明与弱定义回调函数同名的函数(重写)，会优先执行自定义的函数
 
-Hal库中各种弱定义都是用\_\_weak修饰的
+Hal库中各种弱定义都是用__weak修饰的
 
 ![](/posts/24028/image-20240915220050996.png)
 
 过程：串口接收->触发回调->进入回调函数
 
-PS: void HAL\_UART\_RxCpliCallback(UART\_HandleTypeDef \*huart) 不要用成 void HAL\_UART\_TxCpliCallback(UART\_HandleTypeDef \*huart)
+PS: void HAL_UART_RxCpliCallback(UART_HandleTypeDef *huart) 不要用成 void HAL_UART_TxCpliCallback(UART_HandleTypeDef *huart)
 
 ```c
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart){    if(huart->Instance == USART1)    {        uart_rx_ticks = uwTick;        uart_rx_index++;//索引自增        //每次触发回调，都要重新初始化接收中断，定义接收的位置        HAL_UART_Receive_IT(&huart1,&uart_r_buffer[uart_rx_index],1);    }}
-```
+void normalFunction() {
+    // 执行某些操作
+}
 
-### [](#25-串口解析)2.5 串口解析
+int main() {
+    if (condition) {  // 条件检查
+        normalFunction();  // 仅在条件满足时调用
+    }
+    return 0;
+}
+```
+### 2.5 串口解析
 
 **超时解析**
 
 ```c
-void uart_proc(void){    if(uart_rx_index == 0) return;        if(uwTick - uart_rx_ticks > 100)//时间超过100    {        printf("uart data:%s\n",uart_rx_buffer);//发送串口接收内容                memset (uart_rx_buffer,0,uart_rx_index);//清空        uart_rx_index = 0;//指针指令        huart1.pRxBuffPtr = uart_rx_buffer;//uart1缓存区指针指向buffer    }}
+void callbackFunction() {
+    // 执行某些操作
+}
+          
+void eventHandler(void (*callback)()) {
+    // 某个事件发生后调用回调
+    callback();  // 不需要在这里检查条件
+}
+          
+int main() {
+    eventHandler(callbackFunction);  // 传递回调函数
+    return 0;
+}
 ```
-
-## [](#无dma和环形缓冲区的问题)**\# 无DMA和环形缓冲区的问题**
+## **# 无DMA和环形缓冲区的问题**
 
 > **当串口接收速率过快时，如视觉上位机频繁向单片机发送识别到的坐标数据，可能会导致单片机程序阻塞**
 > 
-> **1\. 串口阻塞的解决方案**
+> **1. 串口阻塞的解决方案**
 > 
 > ![](/posts/24028/image-20240919233036903.png)
 > 
@@ -140,26 +169,26 @@ void uart_proc(void){    if(uart_rx_index == 0) return;        if(uwTick - uart_
 > 
 > RingBuffer:环形缓存区
 > 
-> **2\. # 环形缓冲区的概念：**
+> **2. # 环形缓冲区的概念：**
 > 
 > -   头指针
 > -   尾指针
 
-## [](#现象)\# 现象：
+## 现象：
 
-### [](#1-串口无解析发送上位机)1\. 串口无解析发送上位机
+### 1. 串口无解析发送上位机
 
 CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 
 ![](/posts/24028/image-20240920234311280.png)
 
-### [](#2-回调函数名称错误)2\. 回调函数名称错误
+### 2. 回调函数名称错误
 
 ![](/posts/24028/image-20240920231957317.png)
 
-# [](#二-dma空闲中断)二、DMA+空闲中断
+# 二、DMA+空闲中断
 
-## [](#dma的作用)\# DMA的作用
+## DMA的作用
 
 > 无DMA：数据->Uart寄存器->CPU访问Uart寄存器->执行其他程序部分
 > 
@@ -171,15 +200,15 @@ CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 
 在上述配置的基础上对程序文件进行进一步修改。
 
-## [](#空闲中断)\# 空闲中断
+## 空闲中断
 
-> ### [](#1-什么是空闲中断)1\. 什么是空闲中断？
+> ### [](#1-什么是空闲中断)1. 什么是空闲中断？
 > 
 > 空闲中断（Idle Line Interrupt）是串口通信（UART）中常用的一种硬件中断机制。它用于检测串口接收线路在一段时间内没有接收到数据时触发。**空闲中断的核心原理是检测 UART 外设的接收线路在数据传输结束后变为“空闲”状态**（即，停止接收数据，线路上没有任何活动）。
 > 
 > 当串口在接收数据时，硬件会自动维护一个“忙状态”标志。所有数据帧（包括起始位、数据位和停止位）都被接收完成后，接收线路进入空闲状态，此时 UART 硬件会触发“空闲中断”。这个中断标志仅在接收数据后首次空闲时触发，而不是每次线路空闲都会触发。因此，空闲中断能够用于判断数据帧的结束或检测数据包的传输完成。(比如，一个数据帧的长度为8个字节，在串口通信时每帧间隔一个字节来发送，在间隔的这个字节，触发空闲中断，进而可以在中断程序中处理数据帧)
 > 
-> ### [](#2-空闲中断在串口通信中的作用)2\. 空闲中断在串口通信中的作用
+> ### [](#2-空闲中断在串口通信中的作用)2. 空闲中断在串口通信中的作用
 > 
 > 空闲中断主要用于处理非固定长度的串口数据帧和高效的 DMA（Direct Memory Access，直接内存访问）数据传输。其作用和优势如下：
 > 
@@ -198,7 +227,7 @@ CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 > -   使用空闲中断配合 DMA 接收，可以降低 CPU 的使用率。在 DMA 接收过程中，数据自动从串口移入缓冲区，不需要 CPU 的参与，只有在接收结束或空闲中断触发时才进行数据处理。
 > -   对于接收频繁但数量不定的数据流（如传感器数据、通信协议数据包），使用空闲中断能极大地减少 CPU 的负担。
 > 
-> ### [](#3-空闲中断在串口通信中的典型应用场景)3\. 空闲中断在串口通信中的典型应用场景
+> ### [](#3-空闲中断在串口通信中的典型应用场景)3. 空闲中断在串口通信中的典型应用场景
 > 
 > #### [](#31-接收数据包的完整性判断)3.1 **接收数据包的完整性判断**
 > 
@@ -211,13 +240,13 @@ CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 > c复制代码// 空闲中断回调函数示例void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_
 > ```
 
-## [](#1-变量声明)1\. 变量声明
+## 1. 变量声明
 
-**声明 uart\_rx\_dma\_buffer变量，用于数据转运**
+**声明 uart_rx_dma_buffer变量，用于数据转运**
 
 ![](/posts/24028/image-20240919233721950.png)
 
-## [](#2-中断初始化)2\. **中断初始化**
+## 2. **中断初始化**
 
 启用DMA相关中断
 
@@ -229,7 +258,7 @@ CubeMX未定义串口引脚，未注意STM32外设引脚可复用问题
 
 ![](/posts/24028/image-20240919234047785.png)
 
-## [](#3-串口中断函数)3\. **串口中断函数**
+## 3. **串口中断函数**
 
 每次触发串口中断，触发DMA中断
 
@@ -245,15 +274,15 @@ PS: 不再需要串口超时解析
 
 ![](/posts/24028/image-20240920200417955.png) ![](/posts/24028/image-20240920200913934.png)
 
-## [](#现象-2)\# 现象：
+## 现象：
 
 ![](/posts/24028/image-20240921001109060.png)
 
-## [](#补充中断函数与回调函数的区别)\# 补充——中断函数与回调函数的区别
+## 补充——中断函数与回调函数的区别
 
 > 在嵌入式编程中，HAL（硬件抽象层）库的中断函数和回调函数是常见的机制，尤其是在处理外设操作时。这两者的作用有时容易混淆，但它们的概念和使用场景有所不同。下面详细解释它们的区别：
 > 
-> ### [](#1-中断函数interrupt-service-routine-isr)1\. 中断函数（Interrupt Service Routine, ISR）
+> ### [](#1-中断函数interrupt-service-routine-isr)1. 中断函数（Interrupt Service Routine, ISR）
 > 
 > 中断函数是一段处理硬件中断的代码。当外设或处理器触发中断时，处理器会暂停当前的代码执行，转而执行与该中断对应的ISR。一旦中断被处理完毕，程序会恢复到原来的执行状态。
 > 
@@ -262,7 +291,7 @@ PS: 不再需要串口超时解析
 > -   **位置**：ISR通常定义在HAL库或用户代码中，是一个固定的函数（如`TIM_IRQHandler`等）。
 > -   **调用方式**：自动触发，由硬件中断控制器（NVIC）决定何时调用中断处理函数。
 > 
-> ### [](#2-回调函数callback-function)2\. 回调函数（Callback Function）
+> ### [](#2-回调函数callback-function)2. 回调函数（Callback Function）
 > 
 > 回调函数是一个函数指针，通过预先注册到某个模块或API中，等到某个事件发生时，由该模块或API负责调用。HAL库中的回调函数通常是在中断处理完毕后，由ISR或HAL库内部调用，用来进一步处理用户逻辑。
 > 
@@ -286,9 +315,9 @@ PS: 不再需要串口超时解析
 > 
 > 这就是中断函数和回调函数的核心区别。
 
-# [](#三-环形缓冲区)三、环形缓冲区
+# 三、环形缓冲区
 
-## [](#环形缓冲区的简介)\# 环形缓冲区的简介
+## 环形缓冲区的简介
 
 > 环形缓存区，也叫环形缓冲区（Ring Buffer）或循环缓冲区，是一种数据结构。它的特点 是缓存区的头和尾是连接在一起的，形成一个环。当数据写入缓冲区时，指针会不断前进，当到达缓冲区的末尾时，会重新回到开头，这样就实现了一个循环。
 > 
@@ -330,7 +359,7 @@ PS: 不再需要串口超时解析
 > -   作用：是在一段内存块中填充某个给定的值，它是对较大的结构体或数组进行清零操作的一种最快方法
 > -   头文件：C中`#include<string.h>`，C++中`#include<cstring>`
 > 
-> 这里指向的是环形缓冲区内容buffer，为uint8\_t类型的数组变量，数组大小为`RINGBUFFER_SIZE`，使用这段语句将buffer中的内存块内容置零。
+> 这里指向的是环形缓冲区内容buffer，为uint8_t类型的数组变量，数组大小为`RINGBUFFER_SIZE`，使用这段语句将buffer中的内存块内容置零。
 > 
 > ```c
 > // 初始化环形缓冲区void ringbuffer_init(ringbuffer_t *rb){    // 设置读指针和写指针初始值为0    rb->r = 0;    rb->w = 0;    // 将缓冲区内存清零    memset(rb->buffer, 0, sizeof(uint8_t) * RINGBUFFER_SIZE);    // 初始化项目计数为0    rb->itemCount = 0;}
@@ -370,28 +399,48 @@ PS: 不再需要串口超时解析
 > // 从环形缓冲区读取数据int8_t ringbuffer_read(ringbuffer_t *rb, uint8_t *data, uint32_t num){    // 如果缓冲区为空，返回-1    if(ringbuffer_is_empty(rb))        return -1;        // 从缓冲区读取数据    while(num--)    {        *data++ = rb->buffer[rb->r];  // 读取数据并移动读指针        rb->r = (rb->r + 1) % RINGBUFFER_SIZE;  // 读指针循环递增        rb->itemCount--;  // 减少项目计数    }    return 0;  // 读取成功返回0}
 > ```
 
-## [](#1-移植环形缓冲区驱动文件)1\. **移植环形缓冲区驱动文件**
+## 1. **移植环形缓冲区驱动文件**
 
 ```c
-ringbuffer_t usart_rb; //定义ringbuffer_t类型结构体变量uint8_t usart_read_buffer[128];//定义环形缓存区数组
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if(huart->Instance == USART1)
+    {
+        uart_rx_ticks = uwTick;
+        uart_rx_index++;//索引自增
+        //每次触发回调，都要重新初始化接收中断，定义接收的位置
+        HAL_UART_Receive_IT(&huart1,&uart_r_buffer[uart_rx_index],1);
+    }
+}
 ```
-
 -   判断ringbuffer是否满
 -   写入数据
 -   清空结构体
 
-## [](#2-空闲中断回调函数)2\. **空闲中断回调函数**
+## 2. **空闲中断回调函数**
 
 ```c
-/**   * @brief UART DMA接收完成回调函数 			将接收到的数据写入环形缓冲区，并清空DMA缓冲区  * @param huart UART句柄   * @param Size 接收到的数据大小   * @retval None  *///空闲中断回调函数void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){	if (huart->Instance == USART1)  // 判断是 USART1 触发的中断	{		//引入环形缓存区		if(!ringbuffer_is_full(&usart_rb))//判断环形缓存区是否为空		{			ringbuffer_write(&usart_rb,uart_rx_dma_buffer,Size);//将DMA缓冲区中的数据写入环形缓冲区			memset(uart_rx_dma_buffer,0,sizeof(uart_rx_dma_buffer));//清空		}			}}
+void uart_proc(void)
+{
+    if(uart_rx_index == 0) return;
+    
+    if(uwTick - uart_rx_ticks > 100)//时间超过100
+    {
+        printf("uart data:%s\n",uart_rx_buffer);//发送串口接收内容
+        
+        memset (uart_rx_buffer,0,uart_rx_index);//清空
+        uart_rx_index = 0;//指针指令
+        huart1.pRxBuffPtr = uart_rx_buffer;//uart1缓存区指针指向buffer
+    }
+}
 ```
+## 2. **修改串口解析**
 
-## [](#2-修改串口解析)2\. **修改串口解析**
-
-```c
-void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_read(&usart_rb,usart_read_buffer,usart_rb.itemCount);    printf("ringbuffer data:%s\n",usart_read_buffer);    meset(usart_read_buffer,0,sizeof(uint8_t)*128);}
+```plaintext
+c复制代码// 空闲中断回调函数示例
+void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
+    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_
 ```
-
 **STM32串口通信方法总结:**
 
 -   超时解析
@@ -401,7 +450,7 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 -   环形缓存区
     
 
-# [](#四-adc和dma)四、ADC和DMA
+# 四、ADC和DMA
 
 > STM32的ADC（模数转换器）通道IN11指的是STM32微控制器上一个特定的ADC输入通道。每个STM32芯片的ADC都有多个模拟输入引脚，这些引脚标记为`INx`（例如IN0、IN1、IN2等），对应不同的GPIO引脚。
 > 
@@ -411,32 +460,32 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 > 
 > ![](/posts/24028/image-20240921165117470.png)
 
-## [](#1-cubemx配置-2)1\. CubeMX配置
+## 1. CubeMX配置
 
-### [](#11-adc通道分配)1.1 **ADC通道分配：**
+### 1.1 **ADC通道分配：**
 
 -   ADC1: IN11
 -   ADC2: IN15
 
 ![](/posts/24028/image-20240920205816075.png)
 
-### [](#12-配置dma)1.2 配置DMA
+### 1.2 配置DMA
 
-#### [](#121-配置dma通道)1.2.1 配置DMA通道
+#### 1.2.1 配置DMA通道
 
 ![](/posts/24028/image-20240920205900067.png)
 
-#### [](#122-配置为循环模式)1.2.2 配置为循环模式
+#### 1.2.2 配置为循环模式
 
 ![](/posts/24028/image-20240921004004318.png)
 
-#### [](#123-配置dma速度)1.2.3 配置DMA速度
+#### 1.2.3 配置DMA速度
 
 设置为中、高均可
 
 ![](/posts/24028/image-20240920210046359.png)
 
-### [](#13-配置adc属性)1.3 **配置ADC属性**
+### 1.3 **配置ADC属性**
 
 -   四分频
 -   DMA使能
@@ -444,28 +493,34 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 
 ![](/posts/24028/image-20240920210259713.png)
 
-### [](#14-配置adc中断)1.4 **配置ADC中断**
+### 1.4 **配置ADC中断**
 
 优先级为2即可
 
 ![](/posts/24028/image-20240920210416469.png)
 
-## [](#2-驱动程序编写-2)2\. 驱动程序编写
+## 2. 驱动程序编写
 
-### [](#21-创建adc_appc)2.1 **创建adc\_app.c**
+### 2.1 **创建adc_app.c**
 
 **变量声明**
 
 ![](/posts/24028/image-20240920211129892.png)
 ```c
-#include "adc_app.h"uint32_t dma_buff[2][30];//双通道DMAfloat adc_value[2];
-```
+#define RINGBUFFER_SIZE (30) 
 
+typedef struct {
+    uint32_t w;
+    uint32_t r;
+    uint8_t buffer[RINGBUFFER_SIZE];
+    uint32_t itemCount;
+}ringbuffer_t;
+```
 **在主程序初始化启用DMA 转运 ADC 数据**
 
 ![](/posts/24028/image-20240920211606752.png)
 
-### [](#22-定义adc进程)2.2 **定义ADC进程**
+### 2.2 **定义ADC进程**
 
 ![](/posts/24028/image-20240920211903715.png)
 
@@ -474,25 +529,35 @@ void uart_proc(){    if(ringbuffer_is_empty(&usart_rb))return;    ringbuffer_rea
 
 同样的，记得在任务调度器中添加proc
 
-### [](#23-lcd显示)2.3 **lcd显示**
+### 2.3 **lcd显示**
 
 ![](/posts/24028/image-20240920212245141.png)
 
-## [](#动态窗口)\# **动态窗口**
+## **动态窗口**
 
 -   使用环形缓存区
 -   定义结构体
 
 ![](/posts/24028/image-20240920214629559.png) ![](/posts/24028/image-20240920214552510.png)
 
-# [](#多串口通信)多串口通信
+# 多串口通信
 
-## [](#示例一)示例一
+## 示例一
 
 使用DMA+环形缓冲区+空闲中断回调的方法，使用串口通信，在解析函数中每次解析对象为串口一次性连续接收到的数据。
 
 所以，在解析函数`uart_proc`中一次完成对串口数据内容的解析即可，不需要再用状态机的判断逻辑。
 
 ```c
-#include "usart_app.h"uint16_t uart_rx_index = 0;uint16_t uart_rx_ticks = 0;uint8_t uart_rx_buffer[128]={0};uint8_t uart_rx_dma_buffer[128]={0};ringbuffer_t usart_rb; //定义ringbuffer_t类型结构体变量uint8_t usart_read_buffer[128];//定义环形缓存区数组uint8_t uart2_rx_buffer[128]={0};uint8_t uart2_rx_dma_buffer[128]={0};ringbuffer_t usart2_rb; //定义ringbuffer_t类型结构体变量uint8_t usart2_read_buffer[128];//定义环形缓存区数组DataPacket context; // 初始化上下文//串口中断回调函数//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)//{//    if(huart->Instance == USART1)//    {//        uart_rx_ticks = uwTick;//        uart_rx_index++;//索引自增//        //每次触发回调，都要重新初始化接收中断，定义接收的位置//        HAL_UART_Receive_IT(&huart1,&uart_rx_buffer[uart_rx_index],1);//		//printf("test");//排错//    }//}//空闲中断回调函数void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size){	printf("dma data:%s\n",uart2_rx_dma_buffer);//发送串口接收内容		if (huart->Instance == USART1)  // 判断是 USART1 触发的中断	{		//引入环形缓存区		if(!ringbuffer_is_full(&usart_rb))//判断环形缓存区是否为空		{			ringbuffer_write(&usart_rb,uart_rx_dma_buffer,Size);//将DMA缓冲区中的数据写入环形缓冲区			memset(uart_rx_dma_buffer,0,sizeof(uart_rx_dma_buffer));//清空		}			}	else if(huart->Instance == USART2)  // 判断是 USART2 触发的中断	{		if(!ringbuffer_is_full(&usart2_rb))//判断环形缓存区是否为空		{			printf("OK\n");			ringbuffer_write(&usart2_rb,uart2_rx_dma_buffer,Size);//将DMA缓冲区中的数据写入环形缓冲区			memset(uart2_rx_dma_buffer,0,sizeof(uart2_rx_dma_buffer));//清空			}		}}void uart_proc(void){//    if(uart_rx_index == 0) return;//    //    if(uwTick - uart_rx_ticks > 100)//时间超过100//    {//        printf("uart data:%s\n",uart_rx_buffer);//发送串口接收内容//        //        memset (uart_rx_buffer,0,uart_rx_index);//清空//        uart_rx_index = 0;//指针指令//        huart1.pRxBuffPtr = uart_rx_buffer;//uart1缓存区指针指向buffer//    }	// 如果环形缓冲区为空，直接返回 		if(ringbuffer_is_empty(&usart_rb) && ringbuffer_is_empty(&usart2_rb)) return;		// 从环形缓冲区读取数据到读取缓冲区 		//ringbuffer_read(&usart_rb, usart_read_buffer, usart_rb.itemCount);	ringbuffer_read(&usart2_rb, usart2_read_buffer, usart2_rb.itemCount);	// 打印读取缓冲区中的数据 	//printf("ringbuffer data: %s\n", usart_read_buffer);	// 上位机<test协议>	//printf("{plotter}%s\r\n", usart_read_buffer);		//问题1：用状态机写，会导致无法一次性解码；	//使用串口上位机，发现每次发送串口数据，状态机才会+1		/*	if(usart_read_buffer[0] == 0xFF && usart_read_buffer[3] == 0xFB)//帧头帧尾检测	{		if(usart_read_buffer[1] == 0x2A){			context.data_type = 1;//正数		}		else if(usart_read_buffer[1] == 0x2B){			context.data_type = 2;//负数		}				context.data = usart_read_buffer[2];		number_detect = context.data;	}	*/		//parse_buffer(usart_read_buffer,sizeof(usart_read_buffer),&context);	parse_buffer(usart2_read_buffer,sizeof(usart2_read_buffer),&context);	//问题2：无memset会怎么样？	//memset(usart_read_buffer, 0, sizeof(uint8_t) * BUUFER_SIZE);		memset(usart2_read_buffer, 0, sizeof(uint8_t) * BUUFER_SIZE);	}//数据帧解析函数int parse_buffer(uint8_t *buffer,size_t size,DataPacket* data){	if(size < 4)return 0;//数据帧长度小于4，返回 0 表示解析失败		if(buffer[0] == 0xFF && buffer[3] == 0xFB)//帧头帧尾检测	{				if(buffer[1] == 0x2A){			data -> data_type = 1;//正数			data -> data = buffer[2];		}		else if(buffer[1] == 0x2B){			data -> data_type = 2;//负数			data -> data = buffer[2];		}				else{			return 0; //非正确类型，解析失败		}		return 1;//解析成功	}	else{		return 0; //帧头帧尾错误，解析失败	}}void test_proc(){	//printf("%c%c\n", context.state,usart_read_buffer[2]);}
+// 初始化环形缓冲区
+void ringbuffer_init(ringbuffer_t *rb)
+{
+    // 设置读指针和写指针初始值为0
+    rb->r = 0;
+    rb->w = 0;
+    // 将缓冲区内存清零
+    memset(rb->buffer, 0, sizeof(uint8_t) * RINGBUFFER_SIZE);
+    // 初始化项目计数为0
+    rb->itemCount = 0;
+}
 ```

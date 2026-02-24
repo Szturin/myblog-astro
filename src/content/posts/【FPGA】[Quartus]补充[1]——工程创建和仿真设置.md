@@ -3,11 +3,15 @@ title: "【FPGA】[Quartus]补充[1]——工程创建和仿真设置"
 published: 2024-09-21
 updated: 2024-11-08
 description: ""
+category: 学习笔记
+tags:
+  - 嵌入式硬件
+  - FPGA
 ---
 
-author: sz\_jmu
+author: sz_jmu
 
-# [](#一-新建工程)一、新建工程
+# 一、新建工程
 
 ![](/posts/30892/image-20240921231843304.png)
 
@@ -53,7 +57,7 @@ author: sz\_jmu
 
 * * *
 
-[4.编写和编译代码 / 解决编译报错问题\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Rc411J7FW?p=4&vd_source=7026df729530ac261e29b43864230918)
+[4.编写和编译代码 / 解决编译报错问题_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Rc411J7FW?p=4&vd_source=7026df729530ac261e29b43864230918)
 
 ![](/posts/30892/image-20240921233524839.png)
 
@@ -67,12 +71,12 @@ author: sz\_jmu
 
 ![](/posts/30892/image-20240921235550901.png)
 
-# [](#二-quartus-优化配置)二、Quartus 优化配置
+# 二、Quartus 优化配置
 
-## [](#1-字体)1\. 字体
+## 1. 字体
 
 ![](/posts/30892/image-20240921234417742.png)
 
-## [](#2-编译加速)2\. 编译加速
+## 2. 编译加速
 
 ![](/posts/30892/image-20240922000307027.png)

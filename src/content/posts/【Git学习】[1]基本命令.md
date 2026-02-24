@@ -4,27 +4,28 @@ published: 2024-02-23
 updated: 2024-11-08
 category: 学习笔记
 description: ""
+tags:
+  - 软件工具
+  - Git
 ---
 
-# [](#一-git仓库的创建)一、Git仓库的创建
+# 一、Git仓库的创建
 
-## [](#1-git仓库的创建)1\. Git仓库的创建：
+## 1. Git仓库的创建：
 
 将当前目录变成可以GIT管理的目录
 
 ```bash
 git init//创建初始化仓库
 ```
-
-## [](#2-将文件添加到版本库repository)2\. 将文件添加到版本库（Repository）:
+## 2. 将文件添加到版本库（Repository）:
 
 实际上就是把文件修改添加到暂存区
 
 ```bash
-git add . //将当前文件目录下所有文件移入暂存区``
+git add . //将当前文件目录下所有文件移入暂存区`` 
 ```
-
-## [](#3-将暂存区内容添加到版本库repository中)3\. 将暂存区内容添加到版本库（Repository）中：
+## 3. 将暂存区内容添加到版本库（Repository）中：
 
 仓库创建后，`head`默认指向master分支
 
@@ -33,49 +34,61 @@ git add . //将当前文件目录下所有文件移入暂存区``
 每一次的commit相当于一次快照，一但把项目文件该乱了，可以从最近的一次commit恢复
 
 ```bash
-git commit -m "第一次版本提交" //在后面加-m选项，以在命令行中提供提交注释git commit -am "第一次版本提交"//跳过add这一步，可以直接使用 -a选项
+git commit -m "第一次版本提交" //在后面加-m选项，以在命令行中提供提交注释
+git commit -am "第一次版本提交"//跳过add这一步，可以直接使用 -a选项
 ```
-
 注意：每次修改，如果不用`git add`到暂存区，那就不会加入到`commit`中
 
-## [](#4-修改日志)4\. 修改日志
+## 4. 修改日志
 
 版本控制系统肯定有某个命令可以告诉我们历史记录，在Git中，我们用`git log`命令查看
 
 ![](/posts/8948/image-20240903174408863.png)
 
-## [](#5-版本回退)5\. 版本回退
+## 5. 版本回退
 
 1094a…是版本号
 
 ```bash
 git reset --hard 1094a...
 ```
-
 Git的版本回退速度非常快，因为Git在内部有个指向当前版本的`HEAD`指针，当你回退版本的时候，Git仅仅是把HEAD从指向`append GPL`：
 
+```plaintext
+┌────┐
+│HEAD│
+└────┘
+   │
+   └──▶ ○ append GPL
+        │
+        ○ add distributed
+        │
+        ○ wrote a readme file
 ```
-┌────┐│HEAD│└────┘   │   └──▶ ○ append GPL        │        ○ add distributed        │        ○ wrote a readme file
-```
-
 改为指向`add distributed`：
 
+```plaintext
+┌────┐
+│HEAD│
+└────┘
+   │
+   │    ○ append GPL
+   │    │
+   └──▶ ○ add distributed
+        │
+        ○ wrote a readme file
 ```
-┌────┐│HEAD│└────┘   │   │    ○ append GPL   │    │   └──▶ ○ add distributed        │        ○ wrote a readme file
-```
-
 当主机重启后，之前回溯到了旧版本，这次又想回到新版本，Git提供了一个命令git reflog用来记录你的每一次命令：
 
 ![](/posts/8948/image-20240903175257889.png)
 
-## [](#6-撤销修改)6\. 撤销修改
+## 6. 撤销修改
 
 checkout可以丢弃工作区的修改
 
-```
+```plaintext
 git checkout -- readme.txt
 ```
-
 命令`git checkout -- readme.txt`意思就是，把`readme.txt`文件在工作区的修改全部撤销，这里有两种情况：
 
 一种是`readme.txt`自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
@@ -84,7 +97,7 @@ git checkout -- readme.txt
 
 总之，就是让这个文件回到最近一次`git commit`或`git add`时的状态。
 
-## [](#其他命令)\# 其他命令
+## 其他命令
 
 `git status`查看状态
 
@@ -92,29 +105,27 @@ git checkout -- readme.txt
 
 命令`git rm`用于删除一个文件。如果一个文件已经被提交到版本库，那么你永远不用担心误删，但是要小心，你只能恢复文件到最新版本，你会丢失**最近一次提交后你修改的内容**，`git rm`使用后相当于修改后将工作区的文件提交到暂存区，相当于`rm`文件后，使用`add`提交。
 
-# [](#二-远程仓库)二、远程仓库
+# 二、远程仓库
 
-## [](#1-git连接到远程仓库github)1\. Git连接到远程仓库（github）
+## 1. Git连接到远程仓库（github）
 
 ```bash
 git remote add origin [url]//参数[alias]为别名， [url]为远程仓库的地址
 ```
-
 添加后，远程库的名字就是`origin`，这是Git默认的叫法，也可以改成别的，但是`origin`这个名字一看就知道是远程库。
 
 下一步，就可以把本地库的所有内容推送到远程库上
 
-## [](#2-本地内容推送到远程仓库)2\. 本地内容推送到远程仓库
+## 2. 本地内容推送到远程仓库
 
 ```bash
 git push -u origin main
 ```
-
 由于远程库是空的，我们第一次推送`master`分支时，加上了`-u`参数，Git不但会把本地的`master`分支内容推送的远程新的`master`分支，还会把本地的`master`分支和远程的`master`分支关联起来，在以后的推送或者拉取时就可以简化命令
 
 从现在开始，可以通过`git push -u origin main`直接推送到远程仓库
 
-## [](#3-删除远程库)3\. 删除远程库
+## 3. 删除远程库
 
 如果添加的时候地址写错了，或者就是想删除远程库，可以用`git remote rm <name>`命令。使用前，建议先用`git remote -v`查看远程库信息：
 
@@ -128,22 +139,20 @@ $ git remote -v
 ```bash
 $ git remote rm origin
 ```
-
 此处的“删除”其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。远程库本身并没有任何改动。要真正删除远程库，需要登录到GitHub，在后台页面找到删除按钮再删除。
 
-## [](#4-从远程库克隆)4\. 从远程库克隆
+## 4. 从远程库克隆
 
 ```bash
 git clone [address]
 ```
-
 [从远程库克隆 - Git教程 - 廖雪峰的官方网站 (liaoxuefeng.com)](https://liaoxuefeng.com/books/git/remote/clone/index.html)
 
 注意：Git支持多种协议，包括`https`，但`ssh`协议速度最快
 
-# [](#常见问题)\> 常见问题
+# \> 常见问题
 
-## [](#1-git-push-u-origin-main-报错)1\. `git push -u origin main` 报错：
+## 1. `git push -u origin main` 报错：
 
 ![image-20240830004335755](/posts/【Git学习】-1-入门命令/image-20240830004335755.png)
 
@@ -182,11 +191,11 @@ git clone [address]
 > 
 > 按照上述步骤操作，你应该能够成功地将本地更改推送到远程仓库。如果你对合并操作不太熟悉，可以提前备份你的代码库以防万一
 
-# [](#参考文章)参考文章
+# 参考文章
 
 [添加远程库 - Git教程 - 廖雪峰的官方网站 (liaoxuefeng.com)](https://liaoxuefeng.com/books/git/remote/add-remote/index.html)
 
-# [](#更新日志)\# 更新日志
+# 更新日志
 
 > date:2024.1.10
 > 

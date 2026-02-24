@@ -1,3 +1,71 @@
+/* 紧凑排版：减少间距，提高信息密度 */
+.prose-compact {
+    /* 段落间距 */
+    p {
+        @apply my-2;
+    }
+
+    /* 标题间距 */
+    h1 {
+        @apply mt-6 mb-3;
+    }
+    h2 {
+        @apply mt-5 mb-2;
+    }
+    h3, h4, h5, h6 {
+        @apply mt-4 mb-2;
+    }
+
+    /* 列表间距 */
+    ul, ol {
+        @apply my-2;
+    }
+    li {
+        @apply my-0.5;
+    }
+
+    /* 代码块间距 */
+    pre {
+        @apply my-3;
+    }
+
+    /* 引用块间距 */
+    blockquote {
+        @apply my-3;
+    }
+
+    /* 图片间距 */
+    img {
+        @apply my-3;
+    }
+
+    /* 行高紧凑 */
+    line-height: 1.7;
+}
+
+/* ==高亮文本== 样式 */
+mark {
+    background-color: rgba(var(--btn-content), 0.15);
+    color: inherit;
+    padding: 0.1em 0.3em;
+    border-radius: 0.25em;
+}
+
+/* 任务列表样式 */
+.contains-task-list {
+    list-style: none;
+    padding-left: 0;
+}
+.task-list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5em;
+}
+.task-list-item input[type="checkbox"] {
+    margin-top: 0.3em;
+    accent-color: var(--primary);
+}
+
 .custom-md {
     h1 {
         @apply text-3xl;

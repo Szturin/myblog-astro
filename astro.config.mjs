@@ -12,6 +12,7 @@ import rehypeComponents from "rehype-components"; /* Render the custom directive
 import rehypeKatex from "rehype-katex";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
+import remarkGfm from "remark-gfm";
 import remarkGithubAdmonitionsToDirectives from "remark-github-admonitions-to-directives";
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
@@ -21,7 +22,9 @@ import { AdmonitionComponent } from "./src/plugins/rehype-component-admonition.m
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
+import { rehypeMarkHighlight } from "./src/plugins/rehype-mark-highlight.mjs";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
+import { remarkObsidianImages } from "./src/plugins/remark-obsidian-images.mjs";
 import { pluginCustomCopyButton } from "./src/plugins/expressive-code/custom-copy-button.js";
 
 // https://astro.build/config
@@ -104,9 +107,11 @@ export default defineConfig({
 	],
 	markdown: {
 		remarkPlugins: [
+			remarkGfm,
 			remarkMath,
 			remarkReadingTime,
 			remarkExcerpt,
+			remarkObsidianImages,
 			remarkGithubAdmonitionsToDirectives,
 			remarkDirective,
 			remarkSectionize,
@@ -114,6 +119,7 @@ export default defineConfig({
 		],
 		rehypePlugins: [
 			rehypeKatex,
+			rehypeMarkHighlight,
 			rehypeSlug,
 			[
 				rehypeComponents,

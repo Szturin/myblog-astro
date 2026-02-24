@@ -30,6 +30,9 @@ yarn.lock
 .idea
 *.iml
 
+# obsidian
+src/content/posts/.obsidian/
+
 # claude code
 .claude/
 

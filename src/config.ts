@@ -9,7 +9,7 @@ import { LinkPreset } from "./types/config";
 
 export const siteConfig: SiteConfig = {
 	title: "Turin's Blog",
-	subtitle: "数理照亮世界",
+	subtitle: "嵌入式 · 机器人 · 深度学习",
 	lang: "zh_CN",
 	themeColor: {
 		hue: 250,

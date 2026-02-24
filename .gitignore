@@ -29,3 +29,9 @@ yarn.lock
 # ide
 .idea
 *.iml
+
+# claude code
+.claude/
+
+# dev notes
+dev_log.md

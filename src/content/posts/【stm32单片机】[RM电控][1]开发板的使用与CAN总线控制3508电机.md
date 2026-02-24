@@ -1,0 +1,151 @@
+---
+title: "【stm32单片机】[RM电控][1]开发板的使用与CAN总线控制3508电机"
+published: 2024-09-18
+updated: 2024-12-09
+tags:
+  - 算法
+  - 计算机语言
+  - 机器人
+  - 单片机
+  - EDA
+  - 电子技术学习
+description: ""
+---
+
+# [](#一-a板介绍)一、A板介绍
+
+-   A板外部晶振为12MHZ，最高主频为168MHZ
+
+# [](#二-can总线通信原理)二、CAN总线通信原理
+
+## [](#1-can总线是什么)1\. CAN总线是什么
+
+### [](#11-can总线简介)1.1 CAN总线简介
+
+​ CAN 是 Controller Area Network 的缩写，最初是汽车行业为了减少车身上的线束，而且还能进行大量数据的高速通信，由德国电气商博世公司在1986 年开发出的面向汽车的通信协议。现在，CAN 的高性能和可靠性已被认同，并被广泛地应用于工业自动化、船舶、医疗设备、工业设备等方面。RM的电机（3508、2006、6020）的控制也采用了CAN协议进行通信。  
+CAN 总线由 CAN_H 和 CAN_L 一对差分线构成，各个设备一起挂载在总线上。
+
+参考文章：[【RoboMaster】从零开始控制RM电机（2）-CAN通信原理及电调通信协议_can通讯 同步触发控制电机-CSDN博客](https://blog.csdn.net/weixin_54448108/article/details/125881138)
+
+### [](#12-can通信的特点)1.2 CAN通信的特点
+
+**1) 多主控制**  
+多个单元同时开始发送时，发送高优先级 ID 消息的单元可获得发送权。
+
+**2) 消息的发送**
+
+所有的消息由固定格式发送，标识符（Identifier 以下称为 ID）决定优先级。
+
+**3) 通信速度**
+
+同一CAN总线网络，所有单元必须同一通信速率。
+
+## [](#2-can通信协议)2\. CAN通信协议
+
+### [](#21-帧的种类)2.1 帧的种类
+
+CAN通信由五种帧类型
+
+![](/img/loading.gif)
+
+其中数据帧和遥控帧有标准格式和扩展格式两种格式。
+
+标准格式有 11 个位的标识符（Identifier: 以下称 ID），扩展格式有 29 个位的 ID。
+
+控制RM电机使用标准帧。
+
+### [](#22-数据帧)2.2 数据帧
+
+CAN总线数据帧的帧结构：
+
+主要处理
+
+![](/img/loading.gif)
+
+1.  帧起始  
+    表示数据帧开始的段。
+2.  仲裁场  
+    表示该帧优先级的段。
+3.  控制场  
+    表示数据的字节数及保留位的段。
+4.  数据场  
+    数据的内容，可发送 0～8 个字节的数据。
+5.  CRC 场  
+    检查帧的传输错误的段。
+6.  应答场  
+    表示确认正常接收的段。
+7.  帧结尾  
+    表示数据帧结束的段。
+
+##### [](#1仲裁场)(1)仲裁场
+
+CAN 的 ID 分为标准 ID 和 拓展 ID 两类，每个设备都有自己独有的ID，CAN通信通过仲裁ID决定优先级。
+
+##### [](#2控制场)(2)控制场
+
+控制场由 6 个位构成，表示数据段的字节数，C620电调的数据段长度为8
+
+![](/img/loading.gif)
+
+##### [](#3数据场)(3)数据场
+
+如果控制场的DLC表示为DRRR，CAN 总线的一个数据帧中所需要传输的有效数据实际上就是这 8Byte。这8字节的排列顺序为从高到低。
+
+![](/img/loading.gif)
+
+# [](#三-电调通信)三、电调通信
+
+## [](#1-m3508m2006电机)1. M3508&M2006电机
+
+这两种电机代码通用
+
+-   M3508使用C620电调
+-   M2006使用C610电调
+
+### [](#11-单片机-数据帧-电调)1.1 单片机->数据帧->电调
+
+单片机向电调发送控制指令控制电调的电流输出。
+
+一个数据帧只能给四个电机发送数据，
+
+控制前四个电机时将ID设为 0x200
+
+控制后四个电机时将ID设为 0x1FF
+
+![](/img/loading.gif)
+
+### [](#12-电调-数据帧-单片机)1.2 电调->数据帧->单片机
+
+为了实现闭环控制，单片机需要接收电调的反馈报文得到电机的转速、机械转子角度、实时电流数据。
+
+根据接收到的ID判断是哪一个电调的数据，电调反馈报文ID规定为 0x200+电调ID(1-8),如0x201(电调ID为1)。
+
+![](/img/loading.gif)
+
+## [](#2-gm6020电机)2\. GM6020电机
+
+### [](#21-发送)2.1 发送
+
+![](/img/loading.gif)
+
+### [](#22-接收)2.2 接收
+
+![](/img/loading.gif)
+
+## [](#3-cubemx配置can总线协议)3\. CubeMX配置CAN总线协议
+
+-   波特率要设置成1M
+
+## [](#4-程序实现)4\. 程序实现
+
+### [](#41-can数据帧发送)4.1 CAN数据帧发送
+
+```c
+/** * @brief 设置并发送电机控制命令 * @param hcan CAN句柄 * @param STDID 标准ID * @param motor1 电机1控制值 * @param motor2 电机2控制值 * @param motor3 电机3控制值 * @param motor4 电机4控制值 */void Set_motor_cmd(CAN_HandleTypeDef *hcan, uint32_t STDID,                   int16_t motor1, int16_t motor2, int16_t motor3, int16_t motor4){    uint32_t send_mail_box;  // 定义一个变量用于存储发送邮箱编号    // 设置发送消息的标识符    CANx_tx_message.StdId = STDID;    CANx_tx_message.IDE = CAN_ID_STD;  // 标识符选择位，STD-标准帧    CANx_tx_message.RTR = CAN_RTR_DATA;  // 定义帧类型    CANx_tx_message.DLC = 0x08;  // 数据帧长度为8位    // 填充要发送的数据    CANx_send_data[0] = motor1 >> 8;    CANx_send_data[1] = motor1;    CANx_send_data[2] = motor2 >> 8;    CANx_send_data[3] = motor2;    CANx_send_data[4] = motor3 >> 8;    CANx_send_data[5] = motor3;    CANx_send_data[6] = motor4 >> 8;    CANx_send_data[7] = motor4;    // 发送CAN数据    HAL_CAN_AddTxMessage(hcan, &CANx_tx_message, CANx_send_data, &send_mail_box);  // hal库CAN发送函数：该函数用于向发送邮箱添加发送报文，并激活发送请求}
+```
+
+### [](#42-can数据帧接收)4.2 CAN数据帧接收
+
+```c
+/** * @brief CAN接收回调函数 *        处理CAN接收到的数据帧 * @param hcan CAN句柄 */void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *hcan){    CAN_RxHeaderTypeDef RX_Header;  // 定义数据帧的帧头    uint8_t RX_BUFFER[8];           // 接收存放数据帧数据的数组    // 获取CAN接收到的数据帧并存入局部变量    HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &RX_Header, RX_BUFFER);    static uint8_t i = 0;    // 判断接收的是CAN1还是CAN2    if (hcan == &hcan1) {        // CAN1：通过反馈数据的ID确定这一组数据存放的地址        i = RX_Header.StdId - Chassis_3508A;        Motor_measure_fun(&Motor_measure[i], RX_BUFFER);  // 调用函数把数据存入结构体数组    } else if (hcan == &hcan2) {        // CAN2：通过反馈数据的ID确定这一组数据存放的地址        i = RX_Header.StdId - CAN2_3508_ID1 + 7;        Motor_measure_fun(&Motor_measure[i], RX_BUFFER);  // 调用函数把数据存入结构体数组    }}
+```

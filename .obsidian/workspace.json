@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/My first blog.md",
+                "file": "src/content/posts/【STM32单片机】HAL库 03 - 工程模板与任务调度器.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "My first blog"
+              "title": "【STM32单片机】HAL库 03 - 工程模板与任务调度器"
             }
           },
           {
@@ -241,8 +241,15 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "1d87b93b72f1aa72",
+  "active": "17a5b4110ccd5c01",
   "lastOpenFiles": [
+    "src/content/posts/My first blog.md",
+    "src/content/posts/【ROS2】01 - OriginBot常用指令.md",
+    "src/content/posts/【TensorFlow】03 - 张量.md",
+    "src/content/posts/【TensorFlow】02 - 神经网络搭建.md",
+    "src/content/posts/【TensorFlow】01 - 配置GPU环境与快速模型训练.md",
+    "src/content/posts/【微机原理】02 - 中断系统.md",
+    "src/content/posts/【微机原理】01 - 文件寄存器RAM.md",
     "src/content/posts/【Git】04 - 远程仓库.md",
     "src/content/posts/【Git】03 - 标签管理.md",
     "src/content/posts/【Git】02 - 分支管理.md",
@@ -262,13 +269,6 @@
     "src/content/posts/【STM32单片机】标准库 03 - EXTI外部中断.md",
     "src/content/posts/【STM32单片机】标准库 02 - GPIO输出.md",
     "src/content/posts/【STM32单片机】标准库 11 - IIC通信与MPU6050.md",
-    "src/content/posts/【STM32单片机】标准库 01 - 工程创建.md",
-    "src/content/posts/【STM32单片机】标准库 10 - 串口通信.md",
-    "src/content/posts/【STM32单片机】标准库 05 - 定时器控制PWM.md",
-    "src/content/posts/【STM32单片机】HAL库 01 - 初始化配置.md",
-    "src/content/posts/【STM32单片机】HAL库 02 - 时钟树.md",
-    "src/content/posts/【STM32单片机】HAL库 06 - IIC与RTC.md",
-    "src/content/posts/【STM32单片机】HAL库 05 - ADC采集系统.md",
     "科研/毕业设计/图_表格/1_结构图.svg",
     "科研/毕业设计/图_表格/1_结构图.png",
     "科研/毕业设计/~$毕业设计_Res-Unet_Transformer_LLM-2025-2-15.docx",

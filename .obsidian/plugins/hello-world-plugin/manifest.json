@@ -1,0 +1,9 @@
+{
+	"id": "hello-world-button",
+	"name": "Hello World Button",
+	"version": "1.0.0",
+	"minAppVersion": "0.15.0",
+	"description": "A simple plugin with an interactive button that shows Hello World.",
+	"author": "Your Name",
+	"isDesktopOnly": false
+}

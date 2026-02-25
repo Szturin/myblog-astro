@@ -1,5 +1,5 @@
 ---
-title: 【Markdown】Latex 数学公式书写
+title: 【科研写作】01 - Markdown 与 Latex 数学公式书写
 published: 2024-12-16
 updated: 2026-02-25
 description: ""
@@ -7,6 +7,9 @@ category: 技术随笔
 tags:
   - 软件工具
   - Markdown
+  - Latex
+  - 科研写作
+  - 博客写作
 draft: false
 ---
 # 前言
@@ -147,12 +150,12 @@ LaTeX 的命令通常以反斜杠 `\` 开头，参数放在花括号 `{}` 中。
 
 ## 2. 高等数学
 
-|**说明**|**LaTeX 语法**|**渲染效果**|
-|---|---|---|
-|**累加 (Sum)**|`\sum_{i=1}^{n} i^2`|$\sum_{i=1}^{n} i^2$|
-|**积分 (Integral)**|`\int_{a}^{b} f(x) \, dx`|$\int_{a}^{b} f(x) \, dx$|
-|**极限 (Limit)**|`\lim_{x \to \infty} \frac{1}{x}`|$\lim_{x \to \infty} \frac{1}{x}$|
-|**偏导数**|`\frac{\partial y}{\partial x}`|$\frac{\partial y}{\partial x}$|
+| **说明**            | **LaTeX 语法**                      | **渲染效果**                          |
+| ----------------- | --------------------------------- | --------------------------------- |
+| **累加 (Sum)**      | `\sum_{i=1}^{n} i^2`              | $\sum_{i=1}^{n} i^2$              |
+| **积分 (Integral)** | `\int_{a}^{b} f(x) \, dx`         | $\int_{a}^{b} f(x) \, dx$         |
+| **极限 (Limit)**    | `\lim_{x \to \infty} \frac{1}{x}` | $\lim_{x \to \infty} \frac{1}{x}$ |
+| **偏导数**           | `\frac{\partial y}{\partial x}`   | $\frac{\partial y}{\partial x}$   |
 
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "【Git学习】[1]基本命令"
+title: "【Git】01 - 基本命令"
 published: 2024-02-23
 updated: 2024-11-08
 category: 学习笔记

@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[Hal库][嵌入式][3]UART、DMA、ADC"
+title: "【STM32单片机】HAL库 04 - UART、DMA、ADC"
 published: 2024-09-15
 updated: 2024-12-15
 description: ""

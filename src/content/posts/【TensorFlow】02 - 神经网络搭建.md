@@ -1,5 +1,5 @@
 ---
-title: "【Tensorflow】[2] 神经网络搭建"
+title: "【TensorFlow】02 - 神经网络搭建"
 published: 2024-09-07
 updated: 2024-11-08
 description: ""

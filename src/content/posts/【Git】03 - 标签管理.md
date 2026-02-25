@@ -1,5 +1,5 @@
 ---
-title: "【Git学习】[3]标签管理"
+title: "【Git】03 - 标签管理"
 published: 2024-09-03
 updated: 2024-11-08
 category: 学习笔记

@@ -1,5 +1,5 @@
 ---
-title: "【微机原理】[1] 文件寄存器RAM"
+title: "【微机原理】01 - 文件寄存器RAM"
 published: 2024-02-29
 updated: 2024-11-08
 category: 学习笔记

@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[3]EXTI外部中断"
+title: "【STM32单片机】标准库 03 - EXTI外部中断"
 published: 2024-02-27
 updated: 2024-10-29
 category: 学习笔记

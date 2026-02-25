@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[11]IIC通信(mpu6050)"
+title: "【STM32单片机】标准库 11 - IIC通信与MPU6050"
 published: 2024-05-24
 updated: 2024-11-08
 category: 学习笔记

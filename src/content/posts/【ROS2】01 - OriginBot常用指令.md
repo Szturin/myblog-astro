@@ -1,5 +1,5 @@
 ---
-title: "【ROS2】OriginBot ROS2用指令"
+title: "【ROS2】01 - OriginBot常用指令"
 published: 2023-10-21
 updated: 2024-11-08
 category: 学习笔记

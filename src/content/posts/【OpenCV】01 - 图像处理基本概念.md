@@ -1,5 +1,5 @@
 ---
-title: "【Opencv】[1]图像处理基本概念"
+title: "【OpenCV】01 - 图像处理基本概念"
 published: 2024-07-07
 updated: 2024-10-03
 description: ""

@@ -1,5 +1,5 @@
 ---
-title: "【嵌入式】Clion开发工具链的部署"
+title: "【嵌入式工具】03 - CLion开发工具链部署"
 published: 2024-11-14
 draft: true
 description: ""

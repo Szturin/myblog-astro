@@ -1,5 +1,5 @@
 ---
-title: "【Tensorflow】[1]配置Tensorflow-GPU的快速模型训练"
+title: "【TensorFlow】01 - 配置GPU环境与快速模型训练"
 published: 2024-08-11
 updated: 2024-11-08
 category: 学习笔记

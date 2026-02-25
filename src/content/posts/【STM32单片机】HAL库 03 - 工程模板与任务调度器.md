@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[Hal库][嵌入式][1]嵌入式工程模板与“任务调度器”"
+title: "【STM32单片机】HAL库 03 - 工程模板与任务调度器"
 published: 2024-09-09
 updated: 2024-12-16
 description: ""

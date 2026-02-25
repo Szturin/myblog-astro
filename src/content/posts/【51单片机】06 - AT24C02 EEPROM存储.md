@@ -1,5 +1,5 @@
 ---
-title: "【51单片机】AT24C02(EEPROM储存)"
+title: "【51单片机】06 - AT24C02 EEPROM存储"
 published: 2024-03-05
 updated: 2024-09-04
 category: 学习笔记

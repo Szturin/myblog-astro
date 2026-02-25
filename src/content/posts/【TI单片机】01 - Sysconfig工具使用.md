@@ -1,5 +1,5 @@
 ---
-title: "【TI】-1-Sysconfig工具使用（GPIO、定时器为例）"
+title: "【TI单片机】01 - Sysconfig工具使用"
 published: 2024-07-15
 updated: 2024-11-08
 category: 学习笔记

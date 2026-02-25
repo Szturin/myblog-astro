@@ -1,5 +1,5 @@
 ---
-title: "【单片机】SPI协议"
+title: "【通信协议】03 - SPI协议"
 published: 2024-03-08
 updated: 2024-05-02
 category: 学习笔记

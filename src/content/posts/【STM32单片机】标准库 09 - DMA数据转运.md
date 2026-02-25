@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[9]DMA数据转运"
+title: "【STM32单片机】标准库 09 - DMA数据转运"
 published: 2024-05-22
 updated: 2024-10-29
 category: 学习笔记

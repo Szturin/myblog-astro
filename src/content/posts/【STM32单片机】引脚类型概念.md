@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】32位单片机的引脚类型概念"
+title: "【STM32单片机】引脚类型概念"
 published: 2024-12-16
 updated: 2024-12-21
 draft: true

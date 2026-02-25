@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[操作系统][RT-Thread][2]线程同步"
+title: "【STM32单片机】RT-Thread 02 - 线程同步"
 published: 2024-11-12
 updated: 2024-11-15
 description: ""

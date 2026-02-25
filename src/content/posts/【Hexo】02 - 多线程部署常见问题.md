@@ -1,5 +1,5 @@
 ---
-title: "【HEXO】[2] 多线程部署常见问题"
+title: "【Hexo】02 - 多线程部署常见问题"
 published: 2024-05-03
 updated: 2024-11-08
 category: 技术随笔

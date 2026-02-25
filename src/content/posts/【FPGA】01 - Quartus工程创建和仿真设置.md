@@ -1,5 +1,5 @@
 ---
-title: "【FPGA】[Quartus]补充[1]——工程创建和仿真设置"
+title: "【FPGA】01 - Quartus工程创建和仿真设置"
 published: 2024-09-21
 updated: 2024-11-08
 description: ""

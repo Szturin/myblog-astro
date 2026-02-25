@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[2]stm32GPIO输出"
+title: "【STM32单片机】标准库 02 - GPIO输出"
 published: 2024-02-27
 updated: 2024-09-03
 category: 学习笔记

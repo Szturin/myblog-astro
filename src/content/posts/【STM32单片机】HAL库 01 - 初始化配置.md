@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[Hal库][1]Hal库初始化配置"
+title: "【STM32单片机】HAL库 01 - 初始化配置"
 published: 2024-06-09
 updated: 2024-11-08
 category: 学习笔记

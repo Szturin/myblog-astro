@@ -1,5 +1,5 @@
 ---
-title: "【pid算法】[入门篇] 1-深入浅出pid控制算法原理"
+title: "【PID算法】01 - 控制算法原理入门"
 published: 2024-05-12
 updated: 2024-11-18
 description: ""

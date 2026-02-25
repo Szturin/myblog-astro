@@ -1,5 +1,5 @@
 ---
-title: "【yolov5】[1]初探目标检测算法--YOLOv5的训练及在地平线RDK X3上的快速部署"
+title: "【YOLOv5】01 - 目标检测训练与RDK X3部署"
 published: 2024-07-11
 updated: 2024-12-10
 category: 项目总结

@@ -1,5 +1,5 @@
 ---
-title: "【Python学习】[1] Python基础"
+title: "【Python】01 - Python基础（入门）"
 published: 2024-05-19
 updated: 2024-11-08
 category: 学习笔记

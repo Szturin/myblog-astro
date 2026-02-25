@@ -1,5 +1,5 @@
 ---
-title: "【嵌入式】[Keil5使用技巧][1]Debug使用"
+title: "【嵌入式工具】02 - Keil5 Debug使用技巧"
 published: 2024-10-16
 updated: 2024-11-08
 description: ""

@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[5]定时器控制PWM"
+title: "【STM32单片机】标准库 05 - 定时器控制PWM"
 published: 2024-03-05
 updated: 2024-09-03
 category: 学习笔记

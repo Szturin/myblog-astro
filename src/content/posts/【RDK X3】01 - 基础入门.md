@@ -1,5 +1,5 @@
 ---
-title: "【嵌入式系统】[RDK X3][1]RDK X3派基础入门"
+title: "【RDK X3】01 - 基础入门"
 published: 2024-10-01
 updated: 2024-11-15
 description: ""

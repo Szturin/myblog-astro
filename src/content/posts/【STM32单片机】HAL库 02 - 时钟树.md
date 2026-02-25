@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[Hal库][2]stm32时钟树"
+title: "【STM32单片机】HAL库 02 - 时钟树"
 published: 2024-08-14
 updated: 2024-10-29
 category: 学习笔记

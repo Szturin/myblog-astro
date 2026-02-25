@@ -1,5 +1,5 @@
 ---
-title: "【HEXO】[01]HEXO常用命令"
+title: "【Hexo】01 - 常用命令"
 published: 2024-02-20
 updated: 2024-11-08
 category: 技术随笔

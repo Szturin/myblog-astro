@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[Hal库][嵌入式][5]IIC,RTC"
+title: "【STM32单片机】HAL库 06 - IIC与RTC"
 published: 2024-10-07
 updated: 2024-10-29
 description: ""

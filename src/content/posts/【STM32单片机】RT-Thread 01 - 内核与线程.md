@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[操作系统][RT-Thread][1]内核与线程"
+title: "【STM32单片机】RT-Thread 01 - 内核与线程"
 published: 2024-10-16
 updated: 2024-11-08
 description: ""

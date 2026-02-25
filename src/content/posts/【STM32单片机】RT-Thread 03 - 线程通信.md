@@ -1,5 +1,5 @@
 ---
-title: "【stm32单片机】[操作系统][RT-Thread][3]线程通信"
+title: "【STM32单片机】RT-Thread 03 - 线程通信"
 published: 2024-11-12
 updated: 2024-11-15
 description: ""

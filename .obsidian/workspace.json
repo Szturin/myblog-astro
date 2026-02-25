@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/【卡尔曼滤波】[1]理论基础入门.md",
+                "file": "src/content/posts/【STM32标准库】06 - 输入捕获和输出比较.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "【卡尔曼滤波】[1]理论基础入门"
+              "title": "【STM32标准库】06 - 输入捕获和输出比较"
             }
           },
           {
@@ -50,7 +50,7 @@
             "state": {
               "type": "file-explorer",
               "state": {
-                "sortOrder": "byCreatedTime",
+                "sortOrder": "byModifiedTime",
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
@@ -77,7 +77,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:AI/Tool",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -102,7 +102,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 467.50379180908203
   },
   "right": {
     "id": "65be25250b74321b",
@@ -243,32 +243,32 @@
   },
   "active": "1d87b93b72f1aa72",
   "lastOpenFiles": [
-    "src/content/posts/【Python基础】[1]Python的基本语法.md",
-    "src/content/posts/【Opencv】[1]图像处理基本概念.md",
-    "src/content/posts/【微机原理】[1] 文件寄存器RAM.md",
-    "src/content/posts/【stm32单片机】[6]输入捕获和输出比较.md",
-    "src/content/posts/【卡尔曼滤波】[1]理论基础入门.md",
-    "src/content/posts/【TI】-1-Sysconfig工具使用（GPIO、定时器为例）.md",
-    "src/content/posts/【Python学习】[1] Python基础.md",
-    "src/content/posts/【stm32单片机】[9]DMA数据转运.md",
-    "src/content/posts/【Tensorflow】[1]配置Tensorflow-GPU的快速模型训练.md",
-    "src/content/posts/【51单片机】定时器和中断 01.md",
-    "src/content/posts/【TI】[2]常见外设的基本配置.md",
-    "src/content/posts/【Git学习】[3]标签管理.md",
-    "src/content/posts/My first blog.md",
-    "src/content/posts/【C语言入门学习】函数01.md",
-    "src/content/posts/【电赛】[2023E题]运动控制与目标追踪系统复刻[视觉部分].md",
-    "src/content/posts/【pid算法】[入门篇] 1-深入浅出pid控制算法原理.md",
-    "src/content/posts/【嵌入式】[Keil5使用技巧][1]Debug使用.md",
+    "src/content/posts/【STM32标准库】09 - DMA数据转运.md",
+    "src/content/posts/【STM32标准库】11 - IIC通信与MPU6050.md",
     "src/content/posts/【stm32单片机】-Hal库-嵌入式-6-PWM、输入捕获.md",
-    "src/content/posts/【C语言入门学习】[3]代码书写的规范.md",
-    "src/content/posts/【stm32单片机】PID平衡小车项目实战.md",
-    "src/content/posts/【FPGA】[Quartus]补充[1]——工程创建和仿真设置.md",
-    "src/content/posts/【嵌入式】[开发常见问题][1].md",
+    "src/content/posts/【STM32标准库】10 - 串口通信.md",
+    "src/content/posts/【STM32标准库】02 - GPIO输出.md",
+    "src/content/posts/【STM32标准库】01 - 工程创建.md",
+    "src/content/posts/【STM32标准库】03 - EXTI外部中断.md",
+    "src/content/posts/【STM32标准库】05 - 定时器控制PWM.md",
+    "src/content/posts/【STM32标准库】04 - 定时器中断.md",
+    "src/content/posts/【STM32标准库】06 - 输入捕获和输出比较.md",
+    "src/content/posts/【STM32标准库】07 - 编码器接口测速.md",
+    "src/content/posts/【STM32标准库】08 - AD与DA转换.md",
+    "src/content/posts/【单片机】串口通信.md",
+    "src/content/posts/【Tensorflow】[1]配置Tensorflow-GPU的快速模型训练.md",
     "src/content/posts/【嵌入式系统】[RDK X3][1]RDK X3派基础入门.md",
-    "src/content/posts/【stm32单片机】[7]编码器接口测速.md",
-    "src/content/posts/【C语言入门学习】[2]初识C语言 02.md",
-    "src/content/posts/【电赛】2024年H题-自动行驶小车.md",
+    "src/content/posts/【深度学习】[1]神经网络的基本概念.md",
+    "src/content/posts/【C语言入门学习】[1]初识C语言 01.md",
+    "src/content/posts/【卡尔曼滤波】[1]理论基础入门.md",
+    "src/content/posts/My first blog.md",
+    "src/content/posts/【51单片机】06 - AT24C02 EEPROM存储.md",
+    "src/content/posts/2024微机原理课程设计-小车跟随系统.md",
+    "src/content/posts/【51单片机】01 - DS18B20温度传感器.md",
+    "src/content/posts/【51单片机】03 - 定时器和中断（上）.md",
+    "src/content/posts/【51单片机】04 - 定时器和中断（下）.md",
+    "src/content/posts/【51单片机】05 - 红外通信.md",
+    "src/content/posts/【Python基础】[1]Python的基本语法.md",
     "科研/毕业设计/图_表格/1_结构图.svg",
     "科研/毕业设计/图_表格/1_结构图.png",
     "科研/毕业设计/~$毕业设计_Res-Unet_Transformer_LLM-2025-2-15.docx",

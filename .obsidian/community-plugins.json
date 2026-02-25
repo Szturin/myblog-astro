@@ -7,5 +7,6 @@
   "dataview",
   "mindmap",
   "claudian",
-  "obsidian-git"
+  "obsidian-git",
+  "obsidian-linter"
 ]

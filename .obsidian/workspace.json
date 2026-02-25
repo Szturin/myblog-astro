@@ -48,6 +48,20 @@
               "icon": "lucide-file",
               "title": "【Markdown】Latex 数学公式书写"
             }
+          },
+          {
+            "id": "0dafa4dd874d17f8",
+            "type": "leaf",
+            "state": {
+              "type": "webviewer",
+              "state": {
+                "url": "https://www.cnblogs.com/syqwq/p/15190115.html#%E4%B8%80%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86",
+                "title": "如何优雅地在Markdown中输入数学公式 - 不爱喝橙子汁的橙子 - 博客园",
+                "mode": "webview"
+              },
+              "icon": "globe-2",
+              "title": "如何优雅地在Markdown中输入数学公式 - 不爱喝橙子汁的橙子 - 博客园"
+            }
           }
         ],
         "currentTab": 2
@@ -262,9 +276,9 @@
   },
   "active": "4ee571622997d8fd",
   "lastOpenFiles": [
+    "src/content/posts/【Markdown】Latex 数学公式书写.md",
     "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",
     "template/博客文章模板.md",
-    "src/content/posts/【Markdown】Latex 数学公式书写.md",
     "dist/pagefind/fragment/zh-cn_7cf7f1c.pf_fragment",
     "dist/pagefind/fragment/zh-cn_8d56dc9.pf_fragment",
     "dist/pagefind/fragment/zh-cn_9538bef.pf_fragment",

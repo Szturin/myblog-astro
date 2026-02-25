@@ -31,6 +31,7 @@ yarn.lock
 *.iml
 
 # obsidian
+.obsidian/
 src/content/posts/.obsidian/
 
 # claude code

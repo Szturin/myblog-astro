@@ -108,10 +108,10 @@ LaTeX 的命令通常以反斜杠 `\` 开头，参数放在花括号 `{}` 中。
     LaTeX 在编译时会自动帮你填上正确的数字。
 
 # 二、Markdown书写LaTex
+在 Markdown 中使用 LaTeX，本质上是利用 Markdown 解析器（如 MathJax 或 KaTeX）来渲染 LaTeX 格式的数学公式。
 ### 两者的联系
 - **公式标准**：Markdown 本身不支持复杂公式，但现在几乎所有主流的 Markdown 编辑器（如 Typora, Obsidian）都使用 **LaTeX 语法**来渲染数学公式。例如输入 `$E=mc^2$`。
-- **相互转换**：你可以通过工具（如 Pandoc）轻松地将 Markdown 转换为 LaTeX，或者反向转换。
-- **纯文本本质**：两者都是纯文本文件，非常适合配合 Git 等版本控制工具进行管理。
+- **相互转换**：可以通过工具（如 Pandoc）将 Markdown 转换为 LaTeX，或者反向转换。
 
 
 # 三、示例

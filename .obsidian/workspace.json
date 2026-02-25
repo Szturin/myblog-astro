@@ -243,6 +243,7 @@
   },
   "active": "1d87b93b72f1aa72",
   "lastOpenFiles": [
+    "src/content/posts/【STM32单片机】HAL库 03 - 工程模板与任务调度器.md",
     "src/content/posts/【STM32单片机】RT-Thread 03 - 线程通信.md",
     "src/content/posts/【STM32单片机】RT-Thread 02 - 线程同步.md",
     "src/content/posts/【STM32单片机】RT-Thread 01 - 内核与线程.md",
@@ -268,7 +269,6 @@
     "src/content/posts/【STM32标准库】06 - 输入捕获和输出比较.md",
     "src/content/posts/【STM32 HAL库】02 - 时钟树.md",
     "src/content/posts/【STM32 HAL库】01 - 初始化配置.md",
-    "src/content/posts/【STM32标准库】09 - DMA数据转运.md",
     "科研/毕业设计/图_表格/1_结构图.svg",
     "科研/毕业设计/图_表格/1_结构图.png",
     "科研/毕业设计/~$毕业设计_Res-Unet_Transformer_LLM-2025-2-15.docx",

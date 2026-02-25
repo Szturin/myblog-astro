@@ -1,5 +1,5 @@
 ---
-title: 【系列名】序号 - 标题
+title: 【个人站更新】01 Astro 架构与Vibe Coding协同
 published: 2026-02-25
 description: 2026年2月，我的小破站终于重见天日了，这次是非常理想的一次效率&轻量级架构更新。
 category: 技术随笔

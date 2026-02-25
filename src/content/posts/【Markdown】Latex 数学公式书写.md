@@ -132,10 +132,122 @@ LaTeX 的命令通常以反斜杠 `\` 开头，参数放在花括号 `{}` 中。
     ```
 ---
 # 三、示例
+## 1. 基础运算与符号
 
-$E=mc^2$
+|**说明**|**LaTeX 语法**|**渲染效果**|
+|---|---|---|
+|**上下标**|`x_{i}^{2} + y_{j}^{3}`|$x_{i}^{2} + y_{j}^{3}$|
+|**分式**|`\frac{a+b}{c-d}`|$\frac{a+b}{c-d}$|
+|**开方**|`\sqrt[n]{x}`|$\sqrt[n]{x}$|
+|**希腊字母**|`\alpha, \beta, \gamma, \omega, \Omega`|$\alpha, \beta, \gamma, \omega, \Omega$|
+|**向量/粗体**|`\vec{a} \cdot \mathbf{b}`|$\vec{a} \cdot \mathbf{b}$|
 
-# 常用工具汇总
+---
+
+## 2. 高等数学常用语法
+
+在处理微积分、求和等公式时，LaTeX 的排版美感远超 Word。
+
+|**说明**|**LaTeX 语法**|**渲染效果**|
+|---|---|---|
+|**累加 (Sum)**|`\sum_{i=1}^{n} i^2`|$\sum_{i=1}^{n} i^2$|
+|**积分 (Integral)**|`\int_{a}^{b} f(x) \, dx`|$\int_{a}^{b} f(x) \, dx$|
+|**极限 (Limit)**|`\lim_{x \to \infty} \frac{1}{x}`|$\lim_{x \to \infty} \frac{1}{x}$|
+|**偏导数**|`\frac{\partial y}{\partial x}`|$\frac{\partial y}{\partial x}$|
+
+---
+
+## 3. 线性代数与复杂结构（工程常用）
+
+对于矩阵和多行公式，建议使用**块级公式**（即包裹在 `$$...$$` 之间）以获得最佳显示效果。
+
+### 矩阵 (Matrix)
+
+**语法：**
+
+代码段
+
+```
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1
+\end{bmatrix}
+```
+
+**效果：**
+
+$$\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
+
+### 分段函数 (Cases)
+
+**语法：**
+
+代码段
+
+```
+f(n) = \begin{cases} 
+    n/2, & \text{if } n \text{ is even} \\
+    3n+1, & \text{if } n \text{ is odd} 
+\end{cases}
+```
+
+**效果：**
+
+$$f(n) = \begin{cases} n/2, & \text{if } n \text{ is even} \\ 3n+1, & \text{if } n \text{ is odd} \end{cases}$$
+
+### 多行对齐 (Aligned)
+
+当你推导公式时，希望等号对齐：
+
+**语法：**
+
+代码段
+
+```
+\begin{aligned}
+    (a+b)^2 &= (a+b)(a+b) \\
+            &= a^2 + 2ab + b^2
+\end{aligned}
+```
+
+**效果：**
+
+$$\begin{aligned} (a+b)^2 &= (a+b)(a+b) \\ &= a^2 + 2ab + b^2 \end{aligned}$$
+
+---
+
+## 4. 进阶：如何让公式更漂亮？
+
+1. **括号自动缩放**：如果你写 `(\frac{1}{2})`，括号会很小，很难看。
+    
+    - **改进**：使用 `\left( \frac{1}{2} \right)`。效果：$\left( \frac{1}{2} \right)$。括号会自动包裹住内容。
+        
+2. **公式中的空格**：LaTeX 公式中直接打空格是无效的。
+    
+    - **微调间距**：`\,` (小空格), `\;` (大空格), `\quad` (一个字符宽度), `\qquad` (两个字符宽度)。
+        
+3. **公式中的正体**：变量默认是斜体，但单位（如 kg, m/s）或特定函数（如 log, sin）应该用正体。
+    
+    - **正确写法**：`\sin(x)`, `10 \, \text{kg}`。效果：$\sin(x)$, $10 \, \text{kg}$。
+        
+
+---
+
+## 总结：你的 LaTeX 武器库
+
+- **行内引用**：使用 `$公式$`，适合把符号嵌入句子。
+    
+- **独立展示**：使用 `$$公式$$`，适合展示核心结论。
+    
+- **代码查阅**：不需要背，遇到复杂的直接去 [Mathpix](https://mathpix.com/) 截图或者搜“LaTeX symbols cheatsheet”。
+    
+
+你想让我帮你把某个具体的科研公式（比如你最近正在推导的控制算法或损失函数）转换成 LaTeX 代码吗？
+# 总结
+## 工作流
+## 常用工具汇总
+
 - overleaf：
 # 参考文章
 -  [如何优雅地在Markdown中输入数学公式 - 不爱喝橙子汁的橙子 - 博客园](https://www.cnblogs.com/syqwq/p/15190115.html#%E4%B8%80%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86)

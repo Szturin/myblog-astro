@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/【Markdown】数学公式入门.md",
+                "file": "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "【Markdown】数学公式入门"
+              "title": "【个人站更新】01 Astro 架构与Vibe Coding协同"
             }
           },
           {
@@ -41,15 +41,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "template/博客文章模板.md",
+                "file": "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "博客文章模板"
+              "title": "【个人站更新】01 Astro 架构与Vibe Coding协同"
             }
           }
-        ]
+        ],
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -259,8 +260,11 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "17a5b4110ccd5c01",
+  "active": "4ee571622997d8fd",
   "lastOpenFiles": [
+    "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",
+    "template/博客文章模板.md",
+    "src/content/posts/【Markdown】数学公式入门.md",
     "dist/pagefind/fragment/zh-cn_7cf7f1c.pf_fragment",
     "dist/pagefind/fragment/zh-cn_8d56dc9.pf_fragment",
     "dist/pagefind/fragment/zh-cn_9538bef.pf_fragment",
@@ -271,7 +275,6 @@
     "dist/pagefind/fragment/zh-cn_72b9b59.pf_fragment",
     "dist/pagefind/fragment/zh-cn_4c85262.pf_fragment",
     "dist/pagefind/fragment/zh-cn_eea0ced.pf_fragment",
-    "dist/pagefind/fragment/zh-cn_de8f782.pf_fragment",
     "dist/posts/【蓝桥杯单片机】考点复盘1/image-20240323170620229.png",
     "dist/posts/【蓝桥杯单片机】考点复盘1/image-20240323170614058.png",
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image019.jpg",
@@ -282,8 +285,6 @@
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image010.jpg",
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image010-1711183567914-113.jpg",
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image008.jpg",
-    "src/content/posts/【Markdown】数学公式入门.md",
-    "template/博客文章模板.md",
     "src/content/posts/【蓝桥杯】04 - 客观题.md",
     "src/content/posts/【通信协议】01 - IIC协议.md",
     "src/content/posts/【通信协议】03 - SPI协议.md",
@@ -291,7 +292,6 @@
     "src/content/posts/【51单片机】04 - 定时器和中断（下）.md",
     "src/content/posts/【5G】01 - 基本术语.md",
     "src/content/posts/【51单片机】06 - AT24C02 EEPROM存储.md",
-    "src/content/posts/未命名.md",
     "src/content/posts/【通信协议】04 - 串口通信.md",
     "src/content/posts/【微机原理】06 - 红外通信系统.md",
     "src/content/posts/【微机原理】05 - 实验：仿真调试.md",

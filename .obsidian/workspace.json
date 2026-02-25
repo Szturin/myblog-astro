@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",
+                "file": "src/content/posts/【Markdown】Latex 数学公式书写.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "【个人站更新】01 Astro 架构与Vibe Coding协同"
+              "title": "【Markdown】Latex 数学公式书写"
             }
           }
         ],
@@ -264,7 +264,7 @@
   "lastOpenFiles": [
     "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",
     "template/博客文章模板.md",
-    "src/content/posts/【Markdown】数学公式入门.md",
+    "src/content/posts/【Markdown】Latex 数学公式书写.md",
     "dist/pagefind/fragment/zh-cn_7cf7f1c.pf_fragment",
     "dist/pagefind/fragment/zh-cn_8d56dc9.pf_fragment",
     "dist/pagefind/fragment/zh-cn_9538bef.pf_fragment",

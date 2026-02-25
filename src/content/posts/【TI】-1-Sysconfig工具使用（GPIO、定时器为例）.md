@@ -9,7 +9,7 @@ tags:
   - TI
   - 单片机
 ---
-委
+
 # 一、编译器CCS Theia的基本使用
 
 ​ 本文主要介绍通过CCS Theia以及Sysconfig的基本使用方法，将以GPIO和定时器为例，泛化性地介绍CCS Theia这个工具，便于其他外设配置的理解，对于CCS Theia IDE的安装及其环境配置，不做多赘述。

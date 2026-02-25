@@ -41,16 +41,26 @@
             "state": {
               "type": "webviewer",
               "state": {
-                "url": "https://www.cnblogs.com/syqwq/p/15190115.html#%E4%B8%80%E5%9F%BA%E7%A1%80%E9%83%A8%E5%88%86",
+                "url": "https://gemini.google.com/app?utm_source=app_launcher&utm_medium=owned&utm_campaign=base_all",
                 "title": "如何优雅地在Markdown中输入数学公式 - 不爱喝橙子汁的橙子 - 博客园",
                 "mode": "webview"
               },
               "icon": "globe-2",
               "title": "如何优雅地在Markdown中输入数学公式 - 不爱喝橙子汁的橙子 - 博客园"
             }
+          },
+          {
+            "id": "d15fc75331813fea",
+            "type": "leaf",
+            "state": {
+              "type": "empty",
+              "state": {},
+              "icon": "lucide-file",
+              "title": "新标签页"
+            }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -121,7 +131,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 324.50379180908203
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "65be25250b74321b",
@@ -240,7 +251,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 389.5
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -260,7 +271,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "ab6ac6c1b763f578",
+  "active": "0dafa4dd874d17f8",
   "lastOpenFiles": [
     "src/content/posts/【Markdown】Latex 数学公式书写.md",
     "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",

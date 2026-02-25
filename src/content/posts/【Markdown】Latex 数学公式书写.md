@@ -7,12 +7,14 @@ category: 技术随笔
 tags:
   - 软件工具
   - Markdown
+draft: true
 ---
 # 前言
 
 # 一、Latex 基本概念
-
-# 二、Markdown书写Latex
+LaTex是一个排版系统，和我们常用的Word有本质的区别。
+与Markdown类似，通过编写“代码”来生成文档。我们写Latex是纯文本脚本，通过编译器处理后，能够生成精美、严谨排版的PDF格式文档。在理工科领域，LaTex是独一无二的存在，无论是复杂的矩阵、微积分公式还是希腊字母，使用LaTex排版都非常专业且美观，Word的公式编译器在美感和效率上难以企及。
+# 二、Markdown书写LaTex
 
 # 三、示例
 

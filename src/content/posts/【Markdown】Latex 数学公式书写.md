@@ -169,13 +169,10 @@ LaTeX 的命令通常以反斜杠 `\` 开头，参数放在花括号 `{}` 中。
 \end{bmatrix}
 ```
 
-**效果：**
 
 $$\begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$
 
 ### 分段函数 (Cases)
-
-
 ```latex
 f(n) = \begin{cases} 
     n/2, & \text{if } n \text{ is even} \\
@@ -183,60 +180,41 @@ f(n) = \begin{cases}
 \end{cases}
 ```
 
-**效果：**
 
 $$f(n) = \begin{cases} n/2, & \text{if } n \text{ is even} \\ 3n+1, & \text{if } n \text{ is odd} \end{cases}$$
-
 ### 多行对齐 (Aligned)
 
 当你推导公式时，希望等号对齐：
 
-**语法：**
 
-代码段
-
-```
+```latex
 \begin{aligned}
     (a+b)^2 &= (a+b)(a+b) \\
             &= a^2 + 2ab + b^2
 \end{aligned}
 ```
 
-**效果：**
-
 $$\begin{aligned} (a+b)^2 &= (a+b)(a+b) \\ &= a^2 + 2ab + b^2 \end{aligned}$$
 
 ---
 
-## 4. 进阶：如何让公式更漂亮？
+## 4. 进阶
 
 1. **括号自动缩放**：如果你写 `(\frac{1}{2})`，括号会很小，很难看。
-    
     - **改进**：使用 `\left( \frac{1}{2} \right)`。效果：$\left( \frac{1}{2} \right)$。括号会自动包裹住内容。
-        
 2. **公式中的空格**：LaTeX 公式中直接打空格是无效的。
-    
     - **微调间距**：`\,` (小空格), `\;` (大空格), `\quad` (一个字符宽度), `\qquad` (两个字符宽度)。
-        
 3. **公式中的正体**：变量默认是斜体，但单位（如 kg, m/s）或特定函数（如 log, sin）应该用正体。
-    
     - **正确写法**：`\sin(x)`, `10 \, \text{kg}`。效果：$\sin(x)$, $10 \, \text{kg}$。
-        
 
 ---
 
-## 总结：你的 LaTeX 武器库
-
+## 总结
 - **行内引用**：使用 `$公式$`，适合把符号嵌入句子。
-    
 - **独立展示**：使用 `$$公式$$`，适合展示核心结论。
-    
-- **代码查阅**：不需要背，遇到复杂的直接去 [Mathpix](https://mathpix.com/) 截图或者搜“LaTeX symbols cheatsheet”。
-    
+- **代码查阅**：遇到复杂的直接去 [Mathpix](https://mathpix.com/) 截图，利用AI编写。
 
-你想让我帮你把某个具体的科研公式（比如你最近正在推导的控制算法或损失函数）转换成 LaTeX 代码吗？
-# 总结
-## 工作流
+
 ## 常用工具汇总
 
 - overleaf：

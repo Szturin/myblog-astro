@@ -22,21 +22,7 @@
             }
           },
           {
-            "id": "a92843d5c538b79e",
-            "type": "leaf",
-            "state": {
-              "type": "webviewer",
-              "state": {
-                "url": "https://www.cnblogs.com/syqwq",
-                "title": "不爱喝橙子汁的橙子 - 博客园",
-                "mode": "webview"
-              },
-              "icon": "globe-2",
-              "title": "不爱喝橙子汁的橙子 - 博客园"
-            }
-          },
-          {
-            "id": "4ee571622997d8fd",
+            "id": "0dafa4dd874d17f8",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -50,7 +36,7 @@
             }
           },
           {
-            "id": "0dafa4dd874d17f8",
+            "id": "ab6ac6c1b763f578",
             "type": "leaf",
             "state": {
               "type": "webviewer",
@@ -274,7 +260,7 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "4ee571622997d8fd",
+  "active": "ab6ac6c1b763f578",
   "lastOpenFiles": [
     "src/content/posts/【Markdown】Latex 数学公式书写.md",
     "src/content/posts/【个人站更新】01 Astro 架构与Vibe Coding协同.md",

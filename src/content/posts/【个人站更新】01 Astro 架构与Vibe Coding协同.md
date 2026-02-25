@@ -4,6 +4,9 @@ published: 2026-02-25
 description: 2026年2月，我的小破站终于重见天日了，这次是非常理想的一次效率&轻量级架构更新。
 category: 技术随笔
 tags:
+  - 个人建站
+  - 前端
+  - 更新日志
 draft: true
 updated: 2026-02-25
 ---

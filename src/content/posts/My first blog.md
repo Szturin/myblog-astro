@@ -1,7 +1,7 @@
 ---
 title: My first blog
 published: 2023-10-21
-updated: 2024-11-08
+updated: 2026-02-25
 category: 技术随笔
 description: ""
 ---
@@ -11,8 +11,3 @@ description: ""
 ### 将在后续保持优化网站架构及内容更新
 
 #### 记录，markdown错误写法 ，-后面要加空格（#同理）
-
-```bash
-$ tags: 
--数字电路与VHDL设计"
-```

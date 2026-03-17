@@ -35,8 +35,7 @@
               "title": "【C语言入门】01 - 初识C语言（上）"
             }
           }
-        ],
-        "currentTab": 1
+        ]
       }
     ],
     "direction": "vertical"
@@ -246,8 +245,9 @@
       "obsidian-git:Open Git source control": false
     }
   },
-  "active": "17a5b4110ccd5c01",
+  "active": "1d87b93b72f1aa72",
   "lastOpenFiles": [
+    "src/content/posts/【C语言入门】01 - 初识C语言（上）.md",
     "src/assets/images/微信图片_2026-02-28_051015_281.png",
     "src/assets/images/微信图片_2026-02-28_050902_980.png",
     "src/assets/images/ScreenShot_2026-02-28_045525_002.png",
@@ -289,7 +289,6 @@
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image016.jpg",
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image014.jpg",
     "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image012.jpg",
-    "dist/posts/【蓝桥杯单片机】考点复盘1/clip_image010.jpg",
     "src/content/posts/【通信协议】01 - IIC协议.md",
     "src/content/posts/【Hexo】02 - 多线程部署常见问题.md",
     "src/content/posts/【51单片机】04 - 定时器和中断（下）.md",

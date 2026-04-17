@@ -160,6 +160,7 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		assetsInclude: [],
 		build: {
 			rollupOptions: {
 				onwarn(warning, warn) {
@@ -174,5 +175,13 @@ export default defineConfig({
 				},
 			},
 		},
+		plugins: [
+			{
+				name: "ignore-obsidian-base-files",
+				load(id) {
+					if (id.endsWith(".base")) return { code: "export default {}" };
+				},
+			},
+		],
 	},
 });

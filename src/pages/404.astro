@@ -1,0 +1,20 @@
+---
+import { Icon } from "astro-icon/components";
+import MainGridLayout from "@layouts/MainGridLayout.astro";
+
+Astro.response.status = 404;
+Astro.response.statusText = "Not Found";
+---
+<MainGridLayout title="404 - 页面不存在">
+    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+        <div class="card-base z-10 px-6 md:px-9 py-20 relative w-full flex flex-col items-center justify-center text-center">
+            <p class="text-[8rem] font-bold leading-none text-[var(--primary)] mb-4 select-none">404</p>
+            <p class="text-2xl font-bold text-black/75 dark:text-white/75 mb-3">页面不存在</p>
+            <p class="text-black/50 dark:text-white/50 mb-8">你访问的页面可能已被移除，或链接有误。</p>
+            <a href="/" class="btn-card rounded-2xl px-8 py-3 font-bold flex items-center gap-2 active:scale-95 transition">
+                <Icon name="material-symbols:home-outline-rounded" class="text-[1.25rem]" />
+                返回首页
+            </a>
+        </div>
+    </div>
+</MainGridLayout>

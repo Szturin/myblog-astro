@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { onMount, onDestroy } from 'svelte';
+  import { onMount } from 'svelte';
   import { AUTO_MODE, DARK_MODE } from '@constants/constants.ts';
   import { getStoredTheme } from '@utils/setting-utils.ts';
 
   // ===== Giscus 配置 =====
-  // 访问 https://giscus.app 填入你的仓库信息，获取以下 ID
   const REPO = 'Szturin/myblog-astro';
   const REPO_ID = 'R_kgDORX1C1A';
   const CATEGORY = 'Announcements';
@@ -24,18 +23,10 @@
 
   function sendThemeMessage(theme: string) {
     const iframe = document.querySelector<HTMLIFrameElement>('iframe.giscus-frame');
-    if (!iframe?.contentWindow) return;
-    iframe.contentWindow.postMessage(
+    iframe?.contentWindow?.postMessage(
       { giscus: { setConfig: { theme } } },
       'https://giscus.app'
     );
-  }
-
-  function handleStorageChange(e: StorageEvent) {
-    if (e.key === 'theme') {
-      const newTheme = getGiscusTheme();
-      sendThemeMessage(newTheme);
-    }
   }
 
   onMount(() => {
@@ -58,11 +49,19 @@
     script.async = true;
     container.appendChild(script);
 
-    window.addEventListener('storage', handleStorageChange);
-  });
+    // 监听 <html> class 变化（dark 类增减）来同步 Giscus 主题
+    // 使用 MutationObserver 而非 storage 事件，因为 storage 事件
+    // 只在其他标签页触发，无法捕获当前页面的主题切换
+    const observer = new MutationObserver(() => {
+      const isDark = document.documentElement.classList.contains('dark');
+      sendThemeMessage(isDark ? 'dark' : 'light');
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
 
-  onDestroy(() => {
-    window.removeEventListener('storage', handleStorageChange);
+    return () => observer.disconnect();
   });
 </script>
 

@@ -95,13 +95,13 @@ const bannerOffset =
         <meta property="og:type" content="website" />
         )}
 
-		<meta property="og:image" content={image ? `${Astro.site}${image}` : `${Astro.site}${profileConfig.avatar}`}>
+		<meta property="og:image" content={image ? new URL(image, Astro.site).href : `${Astro.site}${profileConfig.avatar}`}>
 
 		<meta name="twitter:card" content="summary_large_image">
 		<meta property="twitter:url" content={Astro.url}>
 		<meta name="twitter:title" content={pageTitle}>
 		<meta name="twitter:description" content={description || pageTitle}>
-		<meta name="twitter:image" content={image ? `${Astro.site}${image}` : `${Astro.site}${profileConfig.avatar}`}>
+		<meta name="twitter:image" content={image ? new URL(image, Astro.site).href : `${Astro.site}${profileConfig.avatar}`}>
 
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
